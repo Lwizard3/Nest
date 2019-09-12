@@ -15,4 +15,4 @@ check out the Source folder for the code and the Final folder for the compiled j
 
 ## Changes:
 
- - I wrote a change log then acedentally deleted it.  
+ - I wrote a change log then accidentally deleted it.  
