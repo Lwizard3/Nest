@@ -18,7 +18,9 @@ import Utility.Math.DoublePoint;
 
 public class Nest {
 	
-	
+	//Welcome to the Nest class!  This is the main class that drives the code
+	//You will notice variables declared arround my code that appear similar,
+	//such as the NestIcon icon which holds the nest image
 	
 	public Window WindowLocation = Window.MainMenu;
 	
@@ -34,6 +36,9 @@ public class Nest {
 
 		Nest.changeWindow(Window.MainMenu);
 	}
+	
+	//This method is the switchboard of nest.  Each window class has a refrence to Nest and
+	//will call changeWindow to switch to a diffrent window
 	
 	public void changeWindow(Window window) {
 		
@@ -56,6 +61,12 @@ public class Nest {
 			new Error("Window file for " + window + " not found", ErrorType.Fatal);
 		}
 	}
+	
+	//This is the startup folder, where code that needs to run at the beginning are called.
+	//Sorry for the mess, it is also a testing ground for new code.  Note the file creation
+	//at the bottom, as Nest is a fully packaged jar file it generates its own folder system
+	//where the jar is located
+	
 	
 	public void startup() {		
 		
