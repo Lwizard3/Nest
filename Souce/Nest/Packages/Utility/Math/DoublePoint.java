@@ -2,6 +2,9 @@ package Utility.Math;
 
 import java.awt.Point;
 
+//One problem I have is the Point class.  While it is nice it doesn't work with non integer
+//numbers, so I wrote this class to express points as a pair of doubles
+
 public class DoublePoint {
 
 	public double x;

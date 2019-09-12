@@ -7,6 +7,9 @@ import java.awt.event.MouseEvent;
 import javax.swing.JComponent;
 
 public final class DragListener extends MouseAdapter {
+	
+	//This is an experimental class that should allow swing components to be dragged.  create
+	//a new drag listener then call DragListener.add(component) to use it
 
 	private Point OldPosition;
 	private Point TargetLocation;

@@ -2,6 +2,8 @@ package UI;
 
 public enum Window {
 	
+	//This is the enum that allows the window switching to work
+	
 	MainMenu(0),
 	Pathfinding(1),
 	Playback(2),

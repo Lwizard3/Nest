@@ -17,6 +17,8 @@ import Main.Nest;
 
 public class ScheduleWindow extends JFrame implements ActionListener {
 	
+	//This will be the schedule window, where you can create and edit schedules
+	
 	ImageIcon NestIcon;
 	
 	public ScheduleWindow(Nest Nest) {

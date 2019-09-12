@@ -2,6 +2,9 @@ package Utility;
 import java.awt.*;
 
 public enum Colors {
+	
+	//This enum allows for the creation of defined colors, such as Falkon Blue
+	
 	FalkonBlue(0, 223, 255);
 	
 	private final int r;

@@ -9,6 +9,12 @@ import Utility.Error.ErrorType;
 
 public final class FileCreator {
 	
+	//This is a class that allows for the creation of files and directories
+	//Look at the methods to see what they take as an input to see what files they create
+	//All files are created if the file doesnt already exist, and any file type can be given
+	
+	//This one creates files and directories from a list
+	
 	public static void CreateFiles(List<String> Files, List<String> Directories) {
 		List<String> DefaultFiles = Files; 
 		List<String> DefaultDirectories = Directories;
@@ -44,6 +50,8 @@ public final class FileCreator {
 			new Error("Missing files and/or directories: \n" + MissingFiles + "[Creating]", ErrorType.NonFatal);
 		}
 	}
+	
+	//This one only creates files
 	
 	public static void CreateFiles(List<String> DataToCreate) {
 		
@@ -87,7 +95,9 @@ public final class FileCreator {
 
 	}
 	
-	public static void CreateFile(String DataToCreate) {
+	//this one creates one file or one directory
+	
+	public static void CreateFileorDirectory(String DataToCreate) {
 		
 		if (DataToCreate.contains(".")) {
 			

@@ -14,7 +14,15 @@ import java.io.OutputStream;
 import Utility.Error.ErrorType;
 
 public class FileManager {
+	
+	//This class is similar to the file creator, but it is used to interact with class files.
+	//There is a save and load class, to save a serializable class to a file or load a class
+	//from a file
 
+	//This method saves a class by converting it into a byte array then writing the binary
+	//to a file.  Because of how a binary file works, it can have any file type and can still 
+	//be read
+	
 	public static <T> void save(T object, String path) {
 		byte[] stream = null;
 		try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -46,6 +54,10 @@ public class FileManager {
 	public static <T> void save(T object, File path) {
 		save(object, path.getPath());
 	}
+	
+	//This method works in a similar method to the above, except it reads a binary file then
+	//creates an instance of the class it finds and outputs a version of the class.  Make sure
+	//you use this in situations where you write the output to the correct instance of the class
 	
 	@SuppressWarnings("unchecked")
 	public static <T> T load(String path) {

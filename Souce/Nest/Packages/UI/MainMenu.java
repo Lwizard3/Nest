@@ -10,6 +10,9 @@ import Utility.Error.ErrorType;
 import Main.Nest;
 
 public class MainMenu extends JFrame implements ActionListener {
+	
+	//This is the main menu.  Not to be mixed up with Nest its self main menu describes
+	//The graphical interface
 
 	private static final long serialVersionUID = 1952929057373855832L;
 
@@ -95,6 +98,8 @@ public class MainMenu extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	
+	//This is the action listener which checks the series of buttons, and calls the Nest.
+	//ChangeWindow for what ever window was selected
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {

@@ -4,6 +4,10 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 public class CubicSpline {
+	
+	//This entire package is a whole lot of really scary math.  This one takes in a list of 
+	//DoublePoints, populates a matrix, then solves it finding a series of equations.  As the
+	//math is quite complex, I wont explain it here, though if you have questions contact me
 
 	
 	public static ArrayList<double[]> calculate(ArrayList<DoublePoint> Points) {

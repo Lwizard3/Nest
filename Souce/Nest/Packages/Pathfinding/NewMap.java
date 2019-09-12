@@ -15,6 +15,8 @@ import Utility.Error;
 import UI.Browse;
 
 public class NewMap extends JFrame implements ActionListener {
+	
+	//This class is the field creation wizard displayed in Pathfinding > file > create
 
 	private static final long serialVersionUID = -5977683333941870418L;
 
@@ -55,7 +57,7 @@ public class NewMap extends JFrame implements ActionListener {
 		setSize(500, 250);
 		setLocationRelativeTo(null);
 		
-	
+		//This block of code is the fancy UI stuff to create the layout	
 		
 		Header = new JLabel("Field Creation Wizard", SwingConstants.CENTER);
 		Header.setFont(new Font("Arial", Font.PLAIN, 30));
@@ -144,7 +146,7 @@ public class NewMap extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		
+		//This is the logic behind the wizard
 		
 		if (e.getSource().equals(BrowseButton)) {
 			String temp = Browse.Browse().getAbsolutePath();
@@ -153,12 +155,16 @@ public class NewMap extends JFrame implements ActionListener {
 			}
 		}
 		
+		//The two if statements check which button is 
 		
 		if (e.getSource().equals(Cancel)) {
 			this.dispose();
 		}
 		
 		if (e.getSource().equals(Create)) {
+			
+			//This code is more logic checking if the inputs are valid and then calling the
+			//Create() method
 					
 			Image = new File(ImageInput.getText());
 			
@@ -187,6 +193,9 @@ public class NewMap extends JFrame implements ActionListener {
 	
 	
 	void Create() {
+		
+		//This method reads the specified image, then creates a field and saves it before 
+		//having the pathfinding window open it
 		
 		try {
 			Map = ImageIO.read(Image);

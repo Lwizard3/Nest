@@ -8,6 +8,8 @@ import javax.swing.JFrame;
 import Main.Nest;
 
 public class RobotWindow extends JFrame {
+	
+	//This will be th home of the robot window, allowing you to create and edit robots
 
 	public RobotWindow(Nest Nest) {
 		

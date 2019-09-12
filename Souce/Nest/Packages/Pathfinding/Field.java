@@ -11,6 +11,11 @@ import Utility.Error;
 import Utility.Error.ErrorType;
 
 public class Field implements Serializable {
+	
+	//This is the Field class, note how it is Serializable.  This allows the Field class
+	//to be saved and loaded.  The Field class stores an image, though for serialization
+	//it needs to be converted to a byte array.  Once the code progresses farther it will
+	//store waypoint and color data too
 
 	private static final long serialVersionUID = -8949961942969196996L;
 
@@ -24,6 +29,8 @@ public class Field implements Serializable {
 		 			
 		Name = name;
 	}
+	
+	//These two methods convert images to byte array and visa versa
 	
 	public static byte[] ImageToArray(Image img) {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -49,6 +56,9 @@ public class Field implements Serializable {
 		
 		return null;
 	}
+	
+	//This method allows you to call Field.Image() to get the image as by default we store 
+	//the images as byte arrays
 	
 	public Image Image() {
 		return ArrayToImage(Map);		

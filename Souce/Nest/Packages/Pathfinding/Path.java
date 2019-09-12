@@ -13,6 +13,9 @@ import Utility.Math.Matrix;
 
 
 public class Path extends Thread implements Serializable {
+	
+	//This class is the path class.  It represents one series of points and the splines 
+	//between them
 
 	/**
 	 * 
@@ -34,7 +37,13 @@ public class Path extends Thread implements Serializable {
 		this.start();
 	}
 	
-	public void run() {
+	public void run() {	
+		
+		//Paths are set up so they have the capability to be threaded.  The run method
+		//is an override of Thread that runs the program on a new thread when the class.start()
+		//method is called.  I have written a calculate() method so path.calculate() can be 
+		//called.  Though calculating a path is not that resource intensive, many can be 
+		//calculated at once using this
 		
 		length = points.size() - 1;
 		
@@ -53,6 +62,9 @@ public class Path extends Thread implements Serializable {
 	}
 	
 	public DoublePoint get(double T) {
+		
+		//This chunk of code allows the point to be acquired on the path from 0-1, where
+		//0 is the beginning and 1 is the end.
 		
 		if (T > 1 || T < 0) {
 			new Error("Cannot access parts of path outside of range", ErrorType.Fatal);
@@ -84,6 +96,9 @@ public class Path extends Thread implements Serializable {
 				Yconstants.get(function)[3] * Math.pow(T, 0)
 				) );
 	}
+	
+	//I'm lumping the massive methods D1 and D2 together.  They are the first and second
+	//derivative respectively.
 	
 	public double getD1(double T) {
 		if (T > 1 || T < 0) {

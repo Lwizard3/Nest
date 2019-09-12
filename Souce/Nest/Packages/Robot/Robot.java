@@ -8,6 +8,11 @@ import Utility.Error;
 import Utility.Error.ErrorType;
 
 public class Robot implements Serializable {
+	
+	//This class will be the class to describe a robot.  It will hold variables about
+	//the robot as well as a list of tasks and a reference to the robot code so that eggs
+	//can be installed automatically
+	
 
 	/**
 	 * 

@@ -2,7 +2,10 @@ package Utility;
 import javax.swing.*;
 
 public class Error extends JOptionPane {
-
+	
+	//This is error class.  It allows a user to call new Error("Message", ErrorType) to create
+	//a neat error popup
+	
 	private static final long serialVersionUID = -7123583803352886038L;
 
 

@@ -16,6 +16,8 @@ import UI.Browse;
 
 
 public class PathfindingWindow extends JFrame implements ActionListener {
+	
+	//This class describes the pathfinding window, and also handles some of the logic too
 
 	private static final long serialVersionUID = -8844945104786086385L;
 
@@ -46,7 +48,6 @@ public class PathfindingWindow extends JFrame implements ActionListener {
 		if (NestIcon != null) {
 			setIconImage(NestIcon.getImage());
 		}
-		
 		
 		setLayout(new FlowLayout());
 		//GridBagConstraints c = new GridBagConstraints();		
@@ -136,6 +137,9 @@ public class PathfindingWindow extends JFrame implements ActionListener {
 		
 		
 	}
+	
+	//This method opens a field file of the .fld type, then draws the field image onto the 
+	//canvas
 	
 	public void Open(File file) {
 		

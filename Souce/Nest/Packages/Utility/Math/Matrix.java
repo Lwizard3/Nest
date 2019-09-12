@@ -1,6 +1,9 @@
 package Utility.Math;
 
 public class Matrix {
+	
+	//while java has a matrix class, I decided to write my own so I could have control of 
+	//what it can do.  It has basic setters and getters as well as basic row operations
 
 	public int width;
 	public int height;

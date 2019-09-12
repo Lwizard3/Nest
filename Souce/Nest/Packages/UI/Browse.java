@@ -6,6 +6,9 @@ import javax.swing.JFileChooser;
 
 public class Browse {	
 	
+	//The File Chooser method can be complex so I decided to make the Browse class to 
+	//allow for file browsing to be easily implemented.
+	
 	public static File Browse(String location) {
 		JFileChooser fc = new JFileChooser(new File(location));
 		int returnVal = fc.showOpenDialog(null);

@@ -7,6 +7,8 @@ import java.awt.Image;
 
 public class FieldCanvas extends Canvas {
 	
+	//This is the custom canvas that will allow drawing of fields
+	
 	public Image Background;
 
 	@Override
