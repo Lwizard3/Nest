@@ -71,27 +71,33 @@ public class Nest {
 	public void startup() {		
 		
 		/*
+		
 		String S  = "";
 		
-		ArrayList<DoublePoint> P = new ArrayList<DoublePoint>();
+		ArrayList<DoublePoint> P = new ArrayList<DoublePoint>();	
 		
-		P.add(new DoublePoint(1, 1));
-		P.add(new DoublePoint(2, 3));
-		P.add(new DoublePoint(5, 4));
-		P.add(new DoublePoint(6, 5));
-		P.add(new DoublePoint(1, 4));
-		P.add(new DoublePoint(4, 2));
-		P.add(new DoublePoint(6, 4));
-		P.add(new DoublePoint(4, 0));
-		P.add(new DoublePoint(0, 2));
-		P.add(new DoublePoint(5, 4));
+		Random R = new Random();
+		
+		int x;
+		int y;
+		
+		for (int i = 0; i < 100; i++) {
+			
+			x = R.nextInt(200) - 100;
+			y = R.nextInt(200) - 100;
+			
+			System.out.println("(" + x + "," + y + ")");
+			
+			P.add(new DoublePoint(x, y));
+			
+		}
 		
 		Path path = new Path(P);
 		
 		path.calculate();
 		
 		try {
-			Thread.sleep(100);
+			path.join();
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -103,7 +109,7 @@ public class Nest {
 			S = "";
 			S += "(";
 			for(int k = 0; k < 4; k++) {
-				S += path.Xconstants.get(i)[k] + "t^" + (3-k);
+				S += E.Clean(path.Xconstants.get(i)[k]) + "t^" + E.Clean((3-k));
 				
 				if (k != 3) {					
 					S += " + ";
@@ -114,7 +120,7 @@ public class Nest {
 			S += ", ";
 			
 			for(int k = 0; k < 4; k++) {
-				S += path.Yconstants.get(i)[k] + "t^" + (3-k);
+				S += E.Clean(path.Yconstants.get(i)[k]) + "t^" + E.Clean((3-k));
 				
 				if (k != 3) {					
 					S += " + ";
@@ -128,7 +134,7 @@ public class Nest {
 			
 		}
 		
-		
+		/*
 		for (float i = 0; i < 1; i += 0.01f) {
 			System.out.println("(" + path.get(i).getX() + "," + path.get(i).getY() + ")");
 		}

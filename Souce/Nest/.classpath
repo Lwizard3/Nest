@@ -13,12 +13,17 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/lukas/Desktop/Robotics/Robotics 2020/Network Tables/libraries/ntcore-java-4.0.0.jar">
+	<classpathentry kind="lib" path="Packages/NetworkTables/ntcore-java-4.0.0.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/lukas/Desktop/Robotics/Robotics 2020/Network Tables/libraries/ntcore-jni-4.0.0-all.jar">
+	<classpathentry kind="lib" path="Packages/NetworkTables/ntcore-jni-4.0.0-all.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="Packages/NetworkTables/wpiutil-java-3.0.0.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>

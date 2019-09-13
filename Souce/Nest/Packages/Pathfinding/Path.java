@@ -9,8 +9,8 @@ import Utility.Error.ErrorType;
 import Utility.Error;
 import Utility.Math.CubicSpline;
 import Utility.Math.DoublePoint;
-import Utility.Math.Matrix; 
-
+import Utility.Math.Matrix;
+import Utility.Math.E;
 
 public class Path extends Thread implements Serializable {
 	
@@ -83,6 +83,8 @@ public class Path extends Thread implements Serializable {
 		}
 		
 		//System.out.println(function);
+		
+		
 		
 		return new DoublePoint((
 				Xconstants.get(function)[0] * Math.pow(T, 3) + 
