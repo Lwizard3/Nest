@@ -4,11 +4,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Random;
 
 import Main.Nest;
 import Pathfinding.*;
 import Utility.Error.ErrorType;
 import Utility.FileManager;
+import Utility.Math.DoublePoint;
 import Utility.DragListener;
 import Utility.Error;
 import UI.Browse;
@@ -98,12 +101,57 @@ public class PathfindingWindow extends JFrame implements ActionListener {
 		ImgHolder = new JLabel();
 		//add(ImgHolder);
 
+		ArrayList<DoublePoint> P = new ArrayList<DoublePoint>();	
+				
 		FC = new FieldCanvas(NestIcon.getImage());
 		FC.setSize(1000, 700);
 		
+		
 		this.add(FC);
 		setVisible(true);	
+		
+		Random R = new Random();
+		
+		for (int k = 0; k < 100; k++) {
+		
+		int x;
+		int y;
+		
+		P = new ArrayList<DoublePoint>();	
+		
+		for (int i = 0; i < 5; i++) {
+			
+			x = R.nextInt(800) + 100;
+			y = R.nextInt(500) + 100;
+			
+			System.out.println("(" + x + "," + y + ")");
+			
+			P.add(new DoublePoint(x, y));
+			
+		}
+		
+		
+		Path path = new Path(P);
+		
+		path.calculate();
+		
+		try {
+			path.join();
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		FC.paths.add(path);
+		
+		System.out.println("Done");	
+
+		
+		}
+		
 		FC.repaint();
+
+		
 
 	}	
 	

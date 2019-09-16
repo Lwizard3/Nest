@@ -29,6 +29,8 @@ public class Path extends Thread implements Serializable {
 	
 	int length;
 	
+	int f;
+	
 	public Path(ArrayList<DoublePoint> p) {
 		points = p;
 	}
@@ -84,7 +86,7 @@ public class Path extends Thread implements Serializable {
 		
 		//System.out.println(function);
 		
-		
+		f = function;
 		
 		return new DoublePoint((
 				Xconstants.get(function)[0] * Math.pow(T, 3) + 
@@ -97,7 +99,7 @@ public class Path extends Thread implements Serializable {
 				Yconstants.get(function)[2] * Math.pow(T, 1) +
 				Yconstants.get(function)[3] * Math.pow(T, 0)
 				) );
-	}
+	}	
 	
 	//I'm lumping the massive methods D1 and D2 together.  They are the first and second
 	//derivative respectively.

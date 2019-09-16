@@ -18,6 +18,11 @@ public class DoublePoint {
 		y = Y;
 	}
 	
+	public DoublePoint(Point P) {
+		x = P.getX();
+		y = P.getY();
+	}
+	
 	public Double getX() {
 		return x;		
 	}
@@ -33,6 +38,13 @@ public class DoublePoint {
 	
 	public Point getPoint() {		
 		return (new Point((int)x, (int)y));
+	}
+	
+	public boolean isNear(DoublePoint P, int range) {
+		if (this.x - P.x < range && this.y - P.y < range) {
+			return true;
+		}
+		return false;
 	}
 	
 }

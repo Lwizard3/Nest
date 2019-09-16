@@ -15,4 +15,10 @@ check out the Source folder for the code and the Final folder for the compiled j
 
 ## Changes:
 
- - I wrote a change log then accidentally deleted it.  
+09/15/19: (The pretty color update)
+
+ - Flux Class added!
+ 
+ - This is a class that lets you cycle through the colors of the rainbow.  Create a new Flux and call Flux() to get the next color in the cycle, or use Flux(int) to get that many colors down the cycle
+  
+ - Path drawing added, the FieldCanvas now holds a list of paths which they will draw
