@@ -1,10 +1,12 @@
 package Pathfinding;
 import java.awt.Image;
+import java.awt.List;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import Utility.Error;
@@ -20,6 +22,8 @@ public class Field implements Serializable {
 	private static final long serialVersionUID = -8949961942969196996L;
 
 	public byte[] Map;
+		
+	public FieldCanvas FC = new FieldCanvas();
 	
 	public String Name;
 	

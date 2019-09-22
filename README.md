@@ -15,6 +15,10 @@ check out the Source folder for the code and the Final folder for the compiled j
 
 ## Changes:
 
+09/22/19: (hopefully stable)
+
+ - Small update here, just a stable build before I begin new work
+
 09/15/19: (The pretty color update)
 
  - Flux Class added!

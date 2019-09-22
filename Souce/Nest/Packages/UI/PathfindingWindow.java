@@ -3,6 +3,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
@@ -105,46 +107,46 @@ public class PathfindingWindow extends JFrame implements ActionListener {
 				
 		FC = new FieldCanvas(NestIcon.getImage());
 		FC.setSize(1000, 700);
-		
-		
+				
 		this.add(FC);
 		setVisible(true);	
 		
 		Random R = new Random();
 		
-		for (int k = 0; k < 100; k++) {
+		for (int k = 0; k < 1; k++) {
 		
-		int x;
-		int y;
-		
-		P = new ArrayList<DoublePoint>();	
-		
-		for (int i = 0; i < 5; i++) {
+			int x;
+			int y;
 			
-			x = R.nextInt(800) + 100;
-			y = R.nextInt(500) + 100;
+			P = new ArrayList<DoublePoint>();	
 			
-			System.out.println("(" + x + "," + y + ")");
+			for (int i = 0; i < 20; i++) {
+				
+				x = R.nextInt(800) + 100;
+				y = R.nextInt(500) + 100;
+				
+				System.out.println("(" + x + "," + y + ")");
+				
+				P.add(new DoublePoint(x, y));
+				
+			}		
 			
-			P.add(new DoublePoint(x, y));
 			
-		}
-		
-		
-		Path path = new Path(P);
-		
-		path.calculate();
-		
-		try {
-			path.join();
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		FC.paths.add(path);
-		
-		System.out.println("Done");	
+			Path path = new Path(P);
+			
+			path.calculate();
+			
+			try {
+				path.join();
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+				
+			FC.paths.add(path);
+			
+			System.out.println("---");	
 
 		
 		}
@@ -185,6 +187,7 @@ public class PathfindingWindow extends JFrame implements ActionListener {
 		
 		
 	}
+
 	
 	//This method opens a field file of the .fld type, then draws the field image onto the 
 	//canvas
