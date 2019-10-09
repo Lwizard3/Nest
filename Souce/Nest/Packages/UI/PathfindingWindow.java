@@ -42,12 +42,15 @@ public class PathfindingWindow extends JFrame implements ActionListener {
 	
 	PathfindingWindow PW;
 	
-	FieldCanvas FC;
+	public FieldCanvas FC;
+	
+	Socket S;
 		
 	public PathfindingWindow(Nest nest) {
 
 		Nest = nest;	
 		PW = this;
+		S = new Socket(PW);
 		
 		NestIcon = Nest.NestIcon;
 		if (NestIcon != null) {
@@ -111,46 +114,6 @@ public class PathfindingWindow extends JFrame implements ActionListener {
 		this.add(FC);
 		setVisible(true);	
 		
-		Random R = new Random();
-		
-		for (int k = 0; k < 1; k++) {
-		
-			int x;
-			int y;
-			
-			P = new ArrayList<DoublePoint>();	
-			
-			for (int i = 0; i < 20; i++) {
-				
-				x = R.nextInt(800) + 100;
-				y = R.nextInt(500) + 100;
-				
-				System.out.println("(" + x + "," + y + ")");
-				
-				P.add(new DoublePoint(x, y));
-				
-			}		
-			
-			
-			Path path = new Path(P);
-			
-			path.calculate();
-			
-			try {
-				path.join();
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-				
-			FC.paths.add(path);
-			
-			System.out.println("---");	
-
-		
-		}
-		
 		FC.repaint();
 
 		
@@ -202,14 +165,17 @@ public class PathfindingWindow extends JFrame implements ActionListener {
 			return;
 					
 		}
+		
 				
 		PW.remove(ImgHolder);
 		ImgHolder = new JLabel(new ImageIcon(field.Image()));	
 		PW.add(ImgHolder);
-		FC.Background = field.Image();
-		FC.repaint();
 		PW.setVisible(false);
 		PW.setVisible(true);
+		
+		S.mount(field);		
+		
+		FC.paths.add(S.FindPath(new DoublePoint(127, 87), new DoublePoint(802, 459)));
 		
 	}
 	
@@ -218,6 +184,10 @@ public class PathfindingWindow extends JFrame implements ActionListener {
 	}
 	
 	void Save() {
+		if (field == null) {
+			return;
+		}
+		
 		FileManager.save(field, "Data/Fields/" + field.Name + ".fld");
 	}
 	

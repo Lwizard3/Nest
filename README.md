@@ -15,6 +15,18 @@ check out the Source folder for the code and the Final folder for the compiled j
 
 ## Changes:
 
+10/09/19: (Pathfinding!!)
+
+ - All the algorithms utilized in pathfinding have been implemented
+ 
+ - Socket was created, allows Pathfinding window to do pathfinding
+ 
+ - Open a field to see the preprogrammed pathfinding run
+ 
+ - Converting images to a map still needs to be done
+ 
+ - Smothing algorithm needs to be created, currently the path has points on a line which cubic splines does not like, which is why lines are not being drawn properly
+
 09/22/19: (hopefully stable)
 
  - Small update here, just a stable build before I begin new work

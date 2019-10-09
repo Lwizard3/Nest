@@ -48,4 +48,12 @@ public class DoublePoint {
 		return false;
 	}
 	
+	public static DoublePoint divide(DoublePoint P, double no) {
+		return new DoublePoint(P.x / no, P.y / no);
+	}
+	
+	public static DoublePoint multiply(DoublePoint P, double no) {
+		return new DoublePoint(P.x * no, P.y * no);
+	}
+	
 }

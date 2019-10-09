@@ -205,9 +205,7 @@ public class NewMap extends JFrame implements ActionListener {
 		}
 		
 		Field field = new Field(Map, NameInput.getText());
-		
-		field.FC = new FieldCanvas();
-			
+					
 		FileManager.save(field, "Data/Fields/" + NameInput.getText() + ".fld");
 				
 		File fieldFile = new File("Data/Fields/" + NameInput.getText() + ".fld");

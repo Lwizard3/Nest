@@ -39,8 +39,10 @@ public class FieldCanvas extends Canvas {
 		Point temp;
 		int c = 0;		
 		
-		/*
+		
 		F.Flux();
+		
+		/*
 		
 		while (F.color != new Color(255, 0, 0)) {
 			c++;
@@ -54,7 +56,9 @@ public class FieldCanvas extends Canvas {
 			}
 			g.fillRect(0, 0, 1000, 700);
 		}
+		
 		*/
+		
 		
 		for (Path P : paths) {
 						

@@ -33,6 +33,7 @@ public class Path extends Thread implements Serializable {
 	
 	public Path(ArrayList<DoublePoint> p) {
 		points = p;
+		this.calculate();
 	}
 	
 	public void calculate() {
@@ -61,6 +62,16 @@ public class Path extends Thread implements Serializable {
 		Xconstants = CubicSpline.calculate(Xlist);
 		Yconstants = CubicSpline.calculate(Ylist);	
 		
+	}
+	
+	public void reverse() {
+		ArrayList<DoublePoint> temp = new ArrayList<DoublePoint>();
+		
+		for (int i = points.size() - 1; i >= 0; i--) {
+			temp.add(points.get(i));
+		}
+				
+		points = temp;
 	}
 	
 	public DoublePoint get(double T) {

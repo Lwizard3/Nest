@@ -21,15 +21,25 @@ public class Field implements Serializable {
 
 	private static final long serialVersionUID = -8949961942969196996L;
 
-	public byte[] Map;
-		
-	public FieldCanvas FC = new FieldCanvas();
-	
+	public byte[] Image;
+			
 	public String Name;
 	
-	public Field(Image map, String name) {
+	public int Resolution;
+	
+	public int Width;
+	public int Height;	
+	
+	public Map map;
+	
+	
+	public Field(Image image, String name) {
 		
-		Map = ImageToArray(map);
+		Image = ImageToArray(image);
+		Width = image.getWidth(null);
+		Height = image.getHeight(null);
+		
+		map = new Map(Width, Height, 10);
 		 			
 		Name = name;
 	}
@@ -65,6 +75,6 @@ public class Field implements Serializable {
 	//the images as byte arrays
 	
 	public Image Image() {
-		return ArrayToImage(Map);		
+		return ArrayToImage(Image);		
 	}
 }

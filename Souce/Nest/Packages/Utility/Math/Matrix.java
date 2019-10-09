@@ -1,6 +1,9 @@
 package Utility.Math;
 
-public class Matrix {
+import java.awt.Point;
+import java.io.Serializable;
+
+public class Matrix implements Serializable {
 	
 	//while java has a matrix class, I decided to write my own so I could have control of 
 	//what it can do.  It has basic setters and getters as well as basic row operations
@@ -16,6 +19,8 @@ public class Matrix {
 	public Matrix(int Width, int Height) {
 		width = Width;
 		height = Height;
+		
+		matrix = new double[width][height];
 	}
 	
 	public Matrix(int Width, int Height, boolean Augment) {
@@ -47,6 +52,10 @@ public class Matrix {
 	
 	public double get(int x, int y) {
 		return matrix[x][y];
+	}
+	
+	public double get(Point P) {
+		return matrix[P.x][P.y];
 	}
 	
 	public double getAugment(int y) {
