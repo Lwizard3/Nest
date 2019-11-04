@@ -3,23 +3,32 @@ import javax.imageio.ImageIO;
 
 import javax.swing.*;
 
+import org.opencv.core.Core;
+
+import Pathfinding.NewMap;
 import Pathfinding.Path;
 import Robot.Robot;
 
+import java.awt.Image;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.*;
 import UI.*;
 import Utility.*;
 import Utility.Error;
-import Utility.Error.ErrorType;
+import Utility.ErrorType;
 import Utility.Math.*;
 import Utility.Math.DoublePoint;
+//import sun.security.util.IOUtils;
 
 
 public class Nest {
 	
 	//Welcome to the Nest class!  This is the main class that drives the code
-	//You will notice variables declared arround my code that appear similar,
+	//You will notice variables declared around my code that appear similar,
 	//such as the NestIcon icon which holds the nest image
 	
 	public Window WindowLocation = Window.MainMenu;
@@ -74,7 +83,10 @@ public class Nest {
 			NestIcon = new ImageIcon(ImageIO.read(getClass().getResource("/NestLogo.png")));
 		} catch (IOException e) {
 			new Error("Cannot load nest logo: " + e.getMessage(), ErrorType.NonFatal);			
-		}	
+		}		
+		
+		//System.loadLibrary( Core.NATIVE_LIBRARY_NAME );
+	
 		
 		List<String> DefaultFiles = new ArrayList<String>(); 
 		List<String> DefaultDirectories = new ArrayList<String>();
@@ -88,8 +100,13 @@ public class Nest {
 		
 		FileCreator.CreateFiles(DefaultFiles, DefaultDirectories);
 		
-
+		/*
+		NewMap M = new NewMap(this, new PathfindingWindow(this));
 		
+		M.Image = new File("C:\\Users\\lukas\\Pictures\\Map1.png");
+		M.Name = "Test";
+		M.Create();
+		*/
 		
 			
 	}

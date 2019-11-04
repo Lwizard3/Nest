@@ -21,6 +21,7 @@ public class FieldCanvas extends Canvas {
 	
 	public Image Background;
 	public ArrayList<Path> paths = new ArrayList<Path>();
+	public ArrayList<Point> points = new ArrayList<Point>();
 	public float pathResolution = 25000;
 	Random R = new Random();
 		
@@ -58,6 +59,12 @@ public class FieldCanvas extends Canvas {
 		}
 		
 		*/
+		
+		
+		
+		for (Point P : points) {
+			g.drawLine(P.x, P.y, P.x, P.y);
+		}
 		
 		
 		for (Path P : paths) {

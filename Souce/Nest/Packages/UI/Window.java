@@ -10,8 +10,9 @@ public enum Window {
 	Schedule(3),
 	Robot(4),
 	Interface(5),
-	Eggs(6),
-	Settings(7);
+	Vision(6),
+	Eggs(7),
+	Settings(8);
 	
 	
 	private final int index;

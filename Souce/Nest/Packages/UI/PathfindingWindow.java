@@ -11,7 +11,7 @@ import java.util.Random;
 
 import Main.Nest;
 import Pathfinding.*;
-import Utility.Error.ErrorType;
+import Utility.ErrorType;
 import Utility.FileManager;
 import Utility.Math.DoublePoint;
 import Utility.DragListener;
@@ -56,6 +56,8 @@ public class PathfindingWindow extends JFrame implements ActionListener {
 		if (NestIcon != null) {
 			setIconImage(NestIcon.getImage());
 		}
+		
+		//new VisionWindow(Nest, S);
 		
 		setLayout(new FlowLayout());
 		//GridBagConstraints c = new GridBagConstraints();		
@@ -108,7 +110,7 @@ public class PathfindingWindow extends JFrame implements ActionListener {
 
 		ArrayList<DoublePoint> P = new ArrayList<DoublePoint>();	
 				
-		FC = new FieldCanvas(NestIcon.getImage());
+		FC = new FieldCanvas();//NestIcon.getImage());
 		FC.setSize(1000, 700);
 				
 		this.add(FC);
@@ -168,15 +170,20 @@ public class PathfindingWindow extends JFrame implements ActionListener {
 		
 				
 		PW.remove(ImgHolder);
-		ImgHolder = new JLabel(new ImageIcon(field.Image()));	
+		//ImgHolder = new JLabel(new ImageIcon(field.Image()));	
 		PW.add(ImgHolder);
+		FC.Background = field.Image();
+		//PW.setSize(field.Image().getWidth(null), field.Image().getHeight(null));
 		PW.setVisible(false);
 		PW.setVisible(true);
 		
 		S.mount(field);		
 		
-		FC.paths.add(S.FindPath(new DoublePoint(127, 87), new DoublePoint(802, 459)));
+		FC.setSize(field.Image().getWidth(null), field.Image().getHeight(null));
 		
+		FC.paths.add(S.FindPath(new DoublePoint(50, 50), new DoublePoint(900, 900)));
+		S.drive(new DoublePoint(50, 50), new DoublePoint(900, 900));
+
 	}
 	
 	public void Open(String file) {

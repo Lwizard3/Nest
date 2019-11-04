@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Utility.Error.ErrorType;
+import Utility.ErrorType;
 
 public final class FileCreator {
 	

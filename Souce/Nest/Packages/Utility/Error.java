@@ -8,13 +8,6 @@ public class Error extends JOptionPane {
 	
 	private static final long serialVersionUID = -7123583803352886038L;
 
-
-	public enum ErrorType {
-		Fatal,
-		NonFatal,
-		Information;
-	}
-
 	
 	public Error(String message, ErrorType errorType)  {
 				

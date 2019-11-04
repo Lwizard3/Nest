@@ -4,12 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import Main.Nest;
 import UI.PathfindingWindow;
-import Utility.Error.ErrorType;
+import Utility.ErrorType;
 import Utility.FileManager;
 import Utility.Error;
 import UI.Browse;
@@ -39,6 +40,9 @@ public class NewMap extends JFrame implements ActionListener {
 	public File Image;
 	
 	public Image Map;
+	
+	public String Name;
+	
 	
 	
 	public NewMap(Nest nest, PathfindingWindow pathfindingWindow) {
@@ -192,7 +196,7 @@ public class NewMap extends JFrame implements ActionListener {
 
 	
 	
-	void Create() {
+	public void Create() {
 		
 		//This method reads the specified image, then creates a field and saves it before 
 		//having the pathfinding window open it
@@ -204,11 +208,13 @@ public class NewMap extends JFrame implements ActionListener {
 			return;
 		}
 		
-		Field field = new Field(Map, NameInput.getText());
+		Name = NameInput.getText();
+		
+		Field field = new Field(Map, Name);
 					
-		FileManager.save(field, "Data/Fields/" + NameInput.getText() + ".fld");
+		FileManager.save(field, "Data/Fields/" + Name + ".fld");
 				
-		File fieldFile = new File("Data/Fields/" + NameInput.getText() + ".fld");
+		File fieldFile = new File("Data/Fields/" + Name + ".fld");
 		
 		
 		PW.Open(fieldFile);

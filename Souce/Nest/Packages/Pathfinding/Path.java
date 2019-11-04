@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import Utility.Error.ErrorType;
+import Utility.ErrorType;
 import Utility.Error;
 import Utility.Math.CubicSpline;
 import Utility.Math.DoublePoint;
@@ -53,14 +53,21 @@ public class Path extends Thread implements Serializable {
 		ArrayList<DoublePoint> Xlist = new ArrayList<DoublePoint>();
 		ArrayList<DoublePoint> Ylist = new ArrayList<DoublePoint>();
 
+		double ty = 0, tx = 0;
 		
 		for (int i = 0; i < points.size(); i++) {
+			try {
+				tx += Math.abs(points.get(i).x - points.get(i - 1).x);
+				ty += Math.abs(points.get(i).y - points.get(i - 1).y);
+			} catch (Exception E) {
+				
+			}
 			Xlist.add(new DoublePoint(i, points.get(i).x));
 			Ylist.add(new DoublePoint(i, points.get(i).y));
 		}
 		
-		Xconstants = CubicSpline.calculate(Xlist);
-		Yconstants = CubicSpline.calculate(Ylist);	
+		Xconstants = CubicSpline.smoothCalculate(Xlist);
+		Yconstants = CubicSpline.smoothCalculate(Ylist);	
 		
 	}
 	

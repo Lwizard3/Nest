@@ -19,5 +19,9 @@
 			<name>Materials</name>
 			<value>file:/C:/Users/lukas/Desktop/Robotics/Robotics%202020/Nest/Materials</value>
 		</variable>
+		<variable>
+			<name>OpenCV</name>
+			<value>file:/C:/Users/lukas/Desktop/Robotics/Robotics%202020/Github/Nest/Souce/Nest/OpenCV</value>
+		</variable>
 	</variableList>
 </projectDescription>

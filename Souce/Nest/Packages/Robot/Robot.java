@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.Serializable;
 import Utility.Error;
 
-import Utility.Error.ErrorType;
+import Utility.ErrorType;
 
 public class Robot implements Serializable {
 	

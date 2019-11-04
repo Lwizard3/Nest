@@ -1,4 +1,5 @@
 package Pathfinding;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.List;
 import java.awt.image.BufferedImage;
@@ -9,8 +10,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+
+import UI.PathfindingWindow;
 import Utility.Error;
-import Utility.Error.ErrorType;
+import Utility.ErrorType;
+
 
 public class Field implements Serializable {
 	
@@ -32,14 +36,24 @@ public class Field implements Serializable {
 	
 	public Map map;
 	
+	public ArrayList<Color> BadColors = new ArrayList<Color>();
+	
 	
 	public Field(Image image, String name) {
+		
+		BadColors.add(Color.black);
 		
 		Image = ImageToArray(image);
 		Width = image.getWidth(null);
 		Height = image.getHeight(null);
 		
-		map = new Map(Width, Height, 10);
+		map = new Map(Width, Height, 10, Image(), BadColors);
+		map.Print();
+		for (int i = 0; i < 50; i++) {
+			map.SmoothMap();
+		}
+		//System.out.println("-------------");
+		map.Print();
 		 			
 		Name = name;
 	}

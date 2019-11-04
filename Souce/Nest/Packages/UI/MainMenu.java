@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import Utility.*;
 import Utility.Error;
-import Utility.Error.ErrorType;
+import Utility.ErrorType;
 import Main.Nest;
 
 public class MainMenu extends JFrame implements ActionListener {
