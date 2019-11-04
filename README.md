@@ -15,6 +15,14 @@ check out the Source folder for the code and the Final folder for the compiled j
 
 ## Changes:
 
+11/04/19: (Pathfinding Part 2)
+
+ - Map algorithms implemented
+ 
+ - Interface repaired
+
+ - Pathfinding opimized
+
 10/09/19: (Pathfinding!!)
 
  - All the algorithms utilized in pathfinding have been implemented
