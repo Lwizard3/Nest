@@ -22,6 +22,28 @@ public class Error extends JOptionPane {
 		case Information:
 			JOptionPane.showMessageDialog(null, message, "Information", JOptionPane.DEFAULT_OPTION);
 			break;
+		case Temporary:
+			JOptionPane messagePane = new JOptionPane(
+		            message,
+		            JOptionPane.INFORMATION_MESSAGE);
+			final JDialog dialog = messagePane.createDialog(this, "Temporary");
+
+		      new SwingWorker<Void, Void>() {
+
+		         @Override
+		         protected Void doInBackground() throws Exception {
+		            Thread.sleep(1000); 
+
+		            return null;
+		         }
+		         
+		         protected void done() {
+		            dialog.dispose();
+		         };
+		      }.execute();
+
+		      dialog.setVisible(true);
+		      break;
 		default:
     	    JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
 			System.exit(0);

@@ -60,10 +60,13 @@ public class FieldCanvas extends Canvas {
 		
 		*/
 		
-		
+		//g.drawLine(0, 300, 1000, 300);
 		
 		for (Point P : points) {
-			g.drawLine(P.x, P.y, P.x, P.y);
+			if (!(P.x < 0 || P.y < 0)) {
+				g.fillOval(P.x-(10/2), P.y-(10/2), 10, 10);
+				//drawNode(P.x, P.y, 10, 0, g);
+			}
 		}
 		
 		
@@ -83,6 +86,7 @@ public class FieldCanvas extends Canvas {
 			
 			for (int i = 0; i < pathResolution; i++) {
 				temp = P.get((double)i / pathResolution).getPoint();
+				double T2 = 300 + (5 / -P.getD1((double)i / pathResolution));
 				
 				//g.setColor(F.Flux(1));
 				
@@ -91,7 +95,7 @@ public class FieldCanvas extends Canvas {
 					c++;
 				}
 				
-				
+				//g.fillOval(temp.x-(10/2), (int)T2-(10/2), 10, 10);
 				
 				g.drawRect(temp.x, temp.y, 1, 1);					
 				

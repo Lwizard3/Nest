@@ -17,7 +17,7 @@ public class CubicSpline {
 		
 		while (index < Points.size() - 1) {
 			//System.out.println("-----");
-			for (int i = 0; i < 5 && index < Points.size(); i++) {
+			for (int i = 0; i < 10 && index < Points.size(); i++) {
 				//System.out.println(index);
 				tempPoints.add(Points.get(index));
 				index++;			

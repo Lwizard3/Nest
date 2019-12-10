@@ -75,12 +75,12 @@ public class AStar {
 			
 		}
 		
-		System.out.println(goal);
+		//System.out.println(goal);
 
 		
 		while (current != start) {
 			current = cameFrom.get(current);
-			System.out.println(current);
+			//System.out.println(current);
 			
 			path.add(new DoublePoint(current));
 			
@@ -92,7 +92,144 @@ public class AStar {
 		return path;
 	}
 	
-	public static ArrayList<DoublePoint> Smooth(ArrayList<DoublePoint> input) {
+	public static ArrayList<DoublePoint> CloseCull(ArrayList<DoublePoint> input) {
+		ArrayList<DoublePoint> line = new ArrayList<DoublePoint>();
+		ArrayList<DoublePoint> output = new ArrayList<DoublePoint>();
+		
+		ArrayList<DoublePoint> temp = input;	
+		
+		double MaxDistance = 2;
+		
+		int i;
+				
+		line.add(temp.get(0));
+				
+		while (temp.size() > 2) {
+			
+			//line.add(output.get(output.size() - 1));
+			line.add(temp.get(1));
+									
+			i = 2;
+			
+			
+			while ( DoublePoint.getDistance(line.get(line.size() - 2), temp.get(i)) < MaxDistance ) {
+				line.add(temp.get(i));					
+				i++;
+					
+				if (temp.size() < i + 2) {					
+					break;
+				}
+			}
+			
+
+			output.add(line.get(line.size() - 1));
+					
+			for (int j = 0; j < line.size(); j++) {
+				temp.remove(0);
+			}
+						
+			while (line.size() > 1) {
+				line.remove(0);
+			}
+			
+		}
+
+		return output;
+	}
+	
+	public static ArrayList<DoublePoint> AngleCull(ArrayList<DoublePoint> input) {
+		ArrayList<DoublePoint> line = new ArrayList<DoublePoint>();
+		ArrayList<DoublePoint> output = new ArrayList<DoublePoint>();
+		
+		ArrayList<DoublePoint> temp = input;
+
+		double MaxAngle = Math.PI / 500;
+		
+		System.out.println(MaxAngle * 180 / Math.PI);
+		
+		double angle;
+		
+		
+		int i;
+				
+		line.add(temp.get(0));
+				
+		while (temp.size() > 2) {
+			
+			//line.add(output.get(output.size() - 1));
+			line.add(temp.get(1));
+									
+			i = 2;
+			
+			
+			while ( angleTest(line.get(0), line.get(i - 1), temp.get(i), MaxAngle) ) {
+				line.add(temp.get(i));					
+				i++;
+					
+				if (temp.size() < i + 2) {					
+					break;
+				}
+			}
+			
+
+			output.add(line.get(line.size() - 1));
+					
+			for (int j = 0; j < line.size(); j++) {
+				temp.remove(0);
+			}
+						
+			while (line.size() > 1) {
+				line.remove(0);
+			}
+			
+		}
+
+		return output;
+	}
+	
+	public static boolean angleTest(DoublePoint p1, DoublePoint p2, DoublePoint p3, double MaxAngle) {
+		double a, b, c, angle;
+		a = DoublePoint.getDistance(p2, p3);
+		b = DoublePoint.getDistance(p1, p3);
+		c = DoublePoint.getDistance(p1, p2);
+		
+		angle = Math.acos((Math.pow(a, 2) - Math.pow(b, 2) - Math.pow(c, 2)) / (-2 * b * c));
+		
+		System.out.println(angle * 180 / Math.PI);
+		
+		if (angle < MaxAngle) {		
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public static ArrayList<DoublePoint> CountCull(ArrayList<DoublePoint> input, int count) {
+		ArrayList<DoublePoint> line = new ArrayList<DoublePoint>();
+		ArrayList<DoublePoint> output = new ArrayList<DoublePoint>();
+		
+		ArrayList<DoublePoint> temp = input;
+
+		//int i = 1;
+		
+		while (temp.size() > count) {
+			for (int i = 0; i < count; i++) {
+				temp.remove(0);
+			}
+			
+			output.add(temp.get(0));
+		}
+		
+		for (int i = 0; i < temp.size() - 2; i++) {
+			temp.remove(0);
+		}
+		
+		output.add(temp.get(0));
+
+		return output;
+	}
+	
+	public static ArrayList<DoublePoint> LinearCull(ArrayList<DoublePoint> input) {
 		
 		ArrayList<DoublePoint> line = new ArrayList<DoublePoint>();
 		ArrayList<DoublePoint> output = new ArrayList<DoublePoint>();
@@ -195,7 +332,7 @@ public class AStar {
 			temp.add(new Point(P.x - 1, P.y));
 		}
 		
-		
+		/*
 		
 		if (P.y > 0 && P.x < map.width - 1 && map.get(P.x + 1, P.y - 1) != 0) {
 			temp.add(new Point(P.x + 1, P.y - 1));
@@ -212,6 +349,8 @@ public class AStar {
 		if (P.x > 0 && P.y > 0 && map.get(P.x - 1, P.y - 1) != 0) {
 			temp.add(new Point(P.x - 1, P.y - 1));
 		}
+		
+		*/
 		
 				
 		return temp;

@@ -1,5 +1,8 @@
 package UI;
 import javax.swing.*;
+
+import Chick.Chick;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,7 +35,7 @@ public class PathfindingWindow extends JFrame implements ActionListener {
 	
 	JLayeredPane layeredPane;
 	JMenuBar menuBar;
-	JMenu fileMenu, waypointMenu, colorMenu, taskMenu;
+	JMenu fileMenu, /* waypointMenu, */ colorMenu, taskMenu;
 	JMenuItem newMap, openMap, saveMap, exit;
 	JMenuItem newNavPoint;
 	
@@ -66,16 +69,23 @@ public class PathfindingWindow extends JFrame implements ActionListener {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
+		ArrayList<DoublePoint> P = new ArrayList<DoublePoint>();	
+		
+		FC = new FieldCanvas();//NestIcon.getImage());
+		FC.setSize(1000, 700);
+		
+		this.add(FC);
+		
 		//c.fill = GridBagConstraints.HORIZONTAL;
     
 		menuBar = new JMenuBar();		
 		
 		fileMenu = new JMenu("File");
-		waypointMenu = new JMenu("Waypoints");
+		//waypointMenu = new JMenu("Waypoints");
 		colorMenu = new JMenu("Colors");
 		
 		fileMenu.setToolTipText("File menu");
-		waypointMenu.setToolTipText("Create and manage waypoints");
+		//waypointMenu.setToolTipText("Create and manage waypoints");
 		colorMenu.setToolTipText("Manage colors of the map");
 						
 		newMap = new JMenuItem("New");
@@ -101,19 +111,14 @@ public class PathfindingWindow extends JFrame implements ActionListener {
 		fileMenu.add(exit);
 		
 		menuBar.add(fileMenu);
-		menuBar.add(waypointMenu);
+		//menuBar.add(waypointMenu);
 		menuBar.add(colorMenu);
 		
 		setJMenuBar(menuBar);
 		ImgHolder = new JLabel();
 		//add(ImgHolder);
-
-		ArrayList<DoublePoint> P = new ArrayList<DoublePoint>();	
 				
-		FC = new FieldCanvas();//NestIcon.getImage());
-		FC.setSize(1000, 700);
-				
-		this.add(FC);
+		
 		setVisible(true);	
 		
 		FC.repaint();
@@ -181,8 +186,27 @@ public class PathfindingWindow extends JFrame implements ActionListener {
 		
 		FC.setSize(field.Image().getWidth(null), field.Image().getHeight(null));
 		
-		FC.paths.add(S.FindPath(new DoublePoint(50, 50), new DoublePoint(900, 900)));
-		S.drive(new DoublePoint(50, 50), new DoublePoint(900, 900));
+		ArrayList<Path> paths = new ArrayList<Path>();
+		
+		FC.paths = new ArrayList<Path>();
+		
+		
+		paths.add(S.FindPath(new DoublePoint(20, 500), new DoublePoint(600, 50)));
+		//paths.add(S.FindPath(new DoublePoint(20, 500), new DoublePoint(980, 500)));
+		//paths.add(S.FindPath(new DoublePoint(20, 500), new DoublePoint(950, 100)));
+		for (Path P : paths) {
+			FC.paths.add(P);
+		}
+		//S.drive(paths.get(0));
+		
+		validate();
+		
+		Chick C = new Chick();
+		C.tune(0, S);
+		for (DoublePoint D : C.points) {
+			FC.points.add(D.getPoint());
+			System.out.println(D);
+		}
 
 	}
 	

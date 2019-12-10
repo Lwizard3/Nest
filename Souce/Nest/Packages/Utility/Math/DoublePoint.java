@@ -59,4 +59,8 @@ public class DoublePoint {
 	public static double getDistance(DoublePoint P1, DoublePoint P2) {
 		return Math.sqrt(Math.pow(P1.x - P2.x, 2) + Math.pow(P1.y - P2.y, 2));
 	}
+	
+	public static DoublePoint add(DoublePoint P1, DoublePoint P2) {
+		return new DoublePoint(P1.x + P2.x, P1.y + P2.y);
+	}
 }

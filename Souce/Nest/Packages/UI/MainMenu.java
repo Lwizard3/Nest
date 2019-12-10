@@ -23,7 +23,7 @@ public class MainMenu extends JFrame implements ActionListener {
 	
 	Button[] Buttons = { 
 		new Button("Pathfinding"), 
-		new Button("Playback"), 
+		new Button("Simulation"), 
 		new Button("Schedule"), 
 		new Button("Eggs"),
 		new Button("Robot"),
@@ -110,7 +110,7 @@ public class MainMenu extends JFrame implements ActionListener {
 		}
 		
 		if (e.getSource() == Buttons[1]) {
-			Nest.changeWindow(Window.Playback);			
+			Nest.changeWindow(Window.Simulation);		
 			this.dispose();
 		}
 		

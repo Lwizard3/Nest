@@ -32,8 +32,20 @@ public class DriveController extends Command {
     if (Math.abs(Y) < 0.1)
       Y = 0;
     
-    //Robot.drive.setRight(Y - X);
-    //Robot.drive.setLeft(Y + X);
+    if (!Robot.j0.getRawButton(3)) {
+      if (X != 0 || Y != 0) {
+        Robot.drive.setRight(Y - X);
+        Robot.drive.setLeft(Y + X);
+      } else if (!(Robot.left != 0 || Robot.right != 0)) {
+        Robot.drive.setRight(0);
+        Robot.drive.setLeft(0);
+      }
+    } else {
+      Robot.drive.setRight(0.5);
+      Robot.drive.setLeft(0.1);
+    }
+
+    
   }
 
 

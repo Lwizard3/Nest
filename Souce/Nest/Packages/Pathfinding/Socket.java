@@ -4,10 +4,12 @@ import java.awt.Image;
 import java.awt.Point;
 
 import Interface.Interface;
+import Interface.Timeout;
 import UI.PathfindingWindow;
 import Utility.*;
 import Utility.Error;
 import Utility.ErrorType;
+import Utility.Math.Clamp;
 import Utility.Math.DoublePoint;
 
 public class Socket {
@@ -55,18 +57,19 @@ public class Socket {
 		
 	}
 	
-	public boolean drive(DoublePoint start, DoublePoint goal) {
+	public boolean drive(Path path) {
 		
-		System.out.println("driving");
+		I.Start();
 		
-		Path path = Field.map.calculatePath(start, goal);
 		double left = 0, right = 0, heading = 0, headingDiff = 0, angle = 0, distance = 0;
 		DoublePoint oldPoint, newPoint;
 		
 		oldPoint = path.get(0);
 		
-		System.out.println("Path Calculated");
-		
+		for (int i = 0; i < 100; i++) {
+			System.out.println(path.getD2((double)i / 100));
+		}
+				
 		for (int i = 1; i < 100; i++) {
 			
 			newPoint = path.get((double)i / 100);
@@ -79,14 +82,22 @@ public class Socket {
 			
 			System.out.println(oldPoint + " " + newPoint + " " + Math.toDegrees(headingDiff) + " " + distance);
 			
-			double rightMax = 0.1;
-			double leftMax = 0.1;
+			double rightMax = 1;
+			double leftMax = 1;
 			
-			if (headingDiff > 0) {
+			if (0 < headingDiff && headingDiff < 1) {
+				headingDiff = 1;
+			}
+			
+			if (-1 < headingDiff && headingDiff < 0) {
+				headingDiff = 1;
+			}
+			
+			if (headingDiff < 0) {
 				right = rightMax;
-				left = leftMax / headingDiff;
-			} else if (headingDiff < 0) {
-				right = rightMax / headingDiff;
+				left = leftMax / Math.abs(path.getD2((double)i / 100));
+			} else if (headingDiff > 0) {
+				right = rightMax / Math.abs(path.getD2((double)i / 100));
 				left = leftMax;
 			} else {
 				left = leftMax;
@@ -97,8 +108,13 @@ public class Socket {
 			heading = angle;
 			oldPoint = newPoint;
 			
+			left = Clamp.clamp(0, 1, left);
+			right = Clamp.clamp(0, 1, right);
 			
-			I.send(left, right);
+			System.out.println(left + " " + right);
+			
+			
+			I.send(left / 5, right / 5, Timeout.Allow);
 	
 			
 			try {
@@ -109,9 +125,17 @@ public class Socket {
 			}
 		}
 		
-		I.send(0, 0);
+		I.send(0, 0, Timeout.Allow);
+		
+		I.Close();
 		
 		return true;
+	}
+	
+	public boolean drive(DoublePoint start, DoublePoint goal) {		
+		Path path = Field.map.calculatePath(start, goal);
+		return drive(path);
+		
 	}
 	
 	/*

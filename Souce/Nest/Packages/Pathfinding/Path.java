@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Utility.ErrorType;
-import Utility.Error;
 import Utility.Math.CubicSpline;
 import Utility.Math.DoublePoint;
-import Utility.Math.Matrix;
 import Utility.Math.E;
+import Utility.Math.Matrix;
+import Utility.Error;
 
 public class Path extends Thread implements Serializable {
 	

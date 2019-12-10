@@ -37,7 +37,7 @@ public class Map implements Serializable {
 		
 		for (int y = 0; y < map.height; y++) {
 			for (int x = 0; x < map.width; x++) {
-				if (x <= 1 || x >= map.width - 2 || y <= 1 || y >= map.height - 2) {
+				if (x <= 0 || x >= map.width - 1 || y <= 0 || y >= map.height - 1) {
 					map.set(x, y, 0);
 					continue;
 				}
@@ -121,26 +121,28 @@ public class Map implements Serializable {
 	}
 	
 	public Path calculatePath(DoublePoint start, DoublePoint goal) {
-		
-		System.out.println("Calculating");
-		
+				
 		Path temp;
 		ArrayList<DoublePoint> points = new ArrayList<DoublePoint>();
 		
 		if (map.get(DoublePoint.divide(goal, resolution).getPoint()) == 0) {
 			new Error("Goal is inside of obsticle", ErrorType.Fatal);
 		}
-		System.out.println("Pre astar");
 		points = AStar.calculate(map, DoublePoint.divide(start, resolution).getPoint(), DoublePoint.divide(goal, resolution).getPoint());
-		System.out.println("Post astar");
 		if (points.size() < 1) {
 			new Error("Path could not be found", ErrorType.Fatal);
 		}
 		
-		System.out.println("astar done");
 		
-		points = AStar.Smooth(points);
-		points = AStar.Smooth(points);
+		//points = AStar.CloseCull(points);
+		//points = AStar.LinearCull(points);
+		//points = AStar.CloseCull(points);
+		//points = AStar.LinearCull(points);
+		//points = AStar.AngleCull(points);
+		//points = AStar.CloseCull(points);
+		points = AStar.CountCull(points, 15);
+
+
 
 		
 		for (int i = 0; i < points.size(); i++) {
@@ -149,8 +151,9 @@ public class Map implements Serializable {
 		}	
 		
 		
-		
-		//points.add(start);
+		if (!points.contains(start)) {
+			points.add(start);
+		}
 		points.add(0, goal);
 		
 		

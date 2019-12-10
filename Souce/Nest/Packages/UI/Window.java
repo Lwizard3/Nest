@@ -6,7 +6,7 @@ public enum Window {
 	
 	MainMenu(0),
 	Pathfinding(1),
-	Playback(2),
+	Simulation(2),
 	Schedule(3),
 	Robot(4),
 	Interface(5),

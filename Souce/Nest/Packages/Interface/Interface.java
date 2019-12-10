@@ -25,19 +25,13 @@ public class Interface {
 	NetworkTableEntry Left;
 	NetworkTableEntry auth;	
 	NetworkTableInstance inst;
+	NetworkTableEntry comm;
 	NetworkTable table;
 	
 	boolean authenticated = false;
 	
 	public Interface() {
-		 inst = NetworkTableInstance.getDefault();
-		 table = inst.getTable("Nest");
-		 Right = table.getEntry("Right");
-		 Left = table.getEntry("Left");
-		 auth = table.getEntry("auth");
-		 inst.startClientTeam(589); 
-		 inst.startDSClient();
-		 
+		Start();		 
 		 
 		 auth.setValue(0);
 		 
@@ -50,48 +44,112 @@ public class Interface {
 			}, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
 	}
 	
-	public boolean send(double left, double right) {
+	public void Start() {
+		inst = NetworkTableInstance.getDefault();
+		 table = inst.getTable("Nest");
+		 Right = table.getEntry("Right");
+		 Left = table.getEntry("Left");
+		 auth = table.getEntry("auth");
+		 comm = table.getEntry("comm");
+		 inst.startClientTeam(589); 
+		 inst.startDSClient();
+	}
+	
+	public void Close() {
+		while (!(auth.getDouble(0) == 0)) {
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		inst.stopClient();
+		inst.stopDSClient();
+		inst.stopClient();
+	}
+	
+	public boolean send(double left, double right, boolean timeout) {
+		if (timeout) {
+			if (send(left, right, true)) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			if (send(left, right, false)) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+	
+	public boolean send(double left, double right, Timeout timeout) {
+		
+		for (int i = 0; i < 10; i++) {
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {			
+			}
+			
+			//System.out.println(auth.getDouble(0));
+			
+			if (inst.isConnected()) {
+				break;
+			}
+		}
+		
+		if (!inst.isConnected()) {
+			new Error("Tables not connected", ErrorType.Temporary);
+			return false;
+		}
+		
+		
 		Left.setValue(left);
 		Right.setValue(right);
 		auth.setValue(1);	
 		
-		while (!authenticated) {
-			try {
-				Thread.sleep(1);
-			} catch (InterruptedException e) {			
+		if (timeout == Timeout.Deny) {
+		
+			while (!(auth.getDouble(0) == 2.0)) {
+				try {
+					Thread.sleep(50);
+				} catch (InterruptedException e) {			
+				}
+				
+				//System.out.println(auth.getDouble(0));
+				
+				if ((auth.getDouble(0) == 2.0)) {
+					auth.forceSetDouble(0);
+					authenticated = false;
+					return true;
+				}
+			}
+		} else {
+			for (int i = 0; i < 10; i++) {
+				try {
+					Thread.sleep(50);
+				} catch (InterruptedException e) {			
+				}
+				
+				//System.out.println(auth.getDouble(0));
+				
+				if ((auth.getDouble(0) == 2.0)) {
+					auth.forceSetDouble(0);
+					authenticated = false;
+					return true;
+				}
 			}
 			
 			System.out.println(auth.getDouble(0));
 			
-			if (authenticated) {
-				authenticated = false;
-				return true;
-			}
-		}
-		
-		/*
-		
-		for (int i = 0; i < 100; i++) {
-			try {
-				Thread.sleep(1);
-			} catch (InterruptedException e) {			
-			}
+			auth.setValue(0);
 			
-			System.out.println(auth.getDouble(0));
-			
-			if (authenticated) {
-				authenticated = false;
-				return true;
-			}
-		}
-		
-		System.out.println(auth.getDouble(0));
-		
-		auth.setValue(0);
-		
-		//new Error("message timed out", ErrorType.NonFatal);	
+			new Error("message timed out", ErrorType.Temporary);	
 		 	
-		 */
+		}
 		
 		return false;
 		

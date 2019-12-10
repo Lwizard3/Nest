@@ -5,8 +5,11 @@ import javax.swing.*;
 
 import org.opencv.core.Core;
 
+import Chick.Chick;
+import Egg.EggGenerator;
 import Pathfinding.NewMap;
 import Pathfinding.Path;
+import Pathfinding.Socket;
 import Robot.Robot;
 
 import java.awt.Image;
@@ -21,8 +24,6 @@ import Utility.*;
 import Utility.Error;
 import Utility.ErrorType;
 import Utility.Math.*;
-import Utility.Math.DoublePoint;
-//import sun.security.util.IOUtils;
 
 
 public class Nest {
@@ -36,6 +37,8 @@ public class Nest {
 	public ImageIcon NestIcon;
 	
 	public Robot Robot;
+	
+	public Socket S;
 	
 	public static void main(String[] args) {
 		
@@ -62,7 +65,10 @@ public class Nest {
 			break;
 		case Schedule:
 			new ScheduleWindow(this);			
-			break;			
+			break;
+		case Simulation:
+			
+			break;
 		case Robot:
 			new RobotWindow(this);
 			break;
@@ -107,6 +113,8 @@ public class Nest {
 		M.Name = "Test";
 		M.Create();
 		*/
+		
+		EggGenerator EG = new EggGenerator();
 		
 			
 	}
