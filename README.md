@@ -15,6 +15,12 @@ check out the Source folder for the code and the Final folder for the compiled j
 
 ## Changes:
 
+12/09/19: (Setpoints)
+
+ - The setpoints for the drive controller are now being calculated and graphed
+ 
+ - PID Tuning coming soon
+
 11/04/19: (Pathfinding Part 2)
 
  - Map algorithms implemented
