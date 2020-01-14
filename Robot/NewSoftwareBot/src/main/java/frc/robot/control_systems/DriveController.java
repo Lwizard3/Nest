@@ -7,25 +7,25 @@
 
 package frc.robot.control_systems;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class DriveController extends Command {
+public class DriveController extends CommandBase {
   public DriveController() {
-    requires(Robot.drive);
+    addRequirements(Robot.drive);
   }
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
-    Robot.drive.resetEncoders();
+  public void initialize() {
+    //Robot.drive.resetEncoders();
   }
 
   double r = -10, Vmax = 1;
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
+  public void execute() {
     double X = Robot.j0.getX();
     double Y = -Robot.j0.getY();
 
@@ -57,41 +57,36 @@ public class DriveController extends Command {
       Vmax -= 0.01;
       System.out.println(Vmax);
     }
-    
+
     if (!Robot.j0.getRawButton(3)) {
-      if (X != 0 || Y != 0) {
         Robot.drive.setRight(Y - X);
-        Robot.drive.setLeft(Y + X);
-      } else if (!(Robot.left != 0 || Robot.right != 0)) {
-        Robot.drive.setRight(0);
-        Robot.drive.setLeft(0);
-      }
+        Robot.drive.setLeft(Y + X); 
     } else {
-      //r += Math.abs(r / 100);
+      // r += Math.abs(r / 100);
       Robot.drive.setRight(Vr);
       Robot.drive.setLeft(Vl);
     }
 
-    //System.out.println("Left: " + Robot.drive.getLeftEncoder());
-    //System.out.println("Right: " + Robot.drive.getRightEncoder());
-    
+     //System.out.println("Left: " + Robot.drive.getLeftEncoder());
+     //System.out.println("Right: " + Robot.drive.getRightEncoder());
+
   }
 
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
+  public boolean isFinished() {
     return false;
   }
 
   // Called once after isFinished returns true
-  @Override
+  //@Override
   protected void end() {
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
-  @Override
+  //@Override
   protected void interrupted() {
   }
 }

@@ -9,7 +9,7 @@ public class Chick {
 	public Field Field;
 	public ArrayList<DoublePoint> points = new ArrayList<DoublePoint>();
 	
-	public void tune(float error, Socket S) {
+	public void tune(float error, Socket S, int resolution) {
 		Path path = S.FindPath(new DoublePoint(20, 500), new DoublePoint(600, 50));
 		ArrayList<Double> LeftSetPoints = new ArrayList<Double>();
 		ArrayList<Double> RightSetPoints = new ArrayList<Double>();
@@ -29,27 +29,35 @@ public class Chick {
 		
 		P3 = new DoublePoint(x2, y2);
 		
-		for (int i = 0; i < 100; i++) {
-			T1 = path.get((double)i / 100f);
-			x = T1.x + Math.sqrt(Math.pow(distance, 2) / (1 + Math.pow((path.getD1((double)i / 100f)), 2)));
-			y = (-path.getD1((double)i / 100f)) * (x - T1.x) + T1.y;
+		for (int i = 0; i < resolution; i++) {
+			T1 = path.get((double)i / resolution);
+			x = T1.x - Math.sqrt(Math.pow(distance, 2) / (1 + 1/ Math.pow((path.getD1((double)i / resolution)), 2)));
+			y = (1/-path.getD1((double)i / resolution)) * (x - T1.x) + T1.y;			
 			
-			P2 = new DoublePoint(x, y);
+			T2 = path.get((double)i / resolution);
+			x2 = T2.x + Math.sqrt(Math.pow(distance, 2) / (1 + 1/ Math.pow((path.getD1((double)i / resolution)), 2)));
+			y2 = (1/-path.getD1((double)i / resolution)) * (x2 - T2.x) + T2.y;
+			
+			if (path.getD1Y((double)i / resolution) > 0) {
+				P2 = new DoublePoint(x, y);
+				P4 = new DoublePoint(x2, y2);
+			} else {
+				P4 = new DoublePoint(x, y);
+				P2 = new DoublePoint(x2, y2);
+			}
+			
+			
 			leftSetPoint += DoublePoint.getDistance(P1, P2);
 			
 			LeftSetPoints.add(leftSetPoint);
 			
-			T2 = path.get((double)i / 100f);
-			x2 = T2.x - Math.sqrt(Math.pow(distance, 2) / (1 + Math.pow((path.getD1((double)i / 100f)), 2)));
-			y2 = (-path.getD1((double)i / 100f)) * (x2 - T2.x) + T2.y;
-			
-			P4 = new DoublePoint(x2, y2);
 			rightSetPoint += DoublePoint.getDistance(P3, P4);
 			
 			RightSetPoints.add(rightSetPoint);
 			
 			points.add(P2);
 			points.add(P4);
+			//points.add(T1);
 			
 			P1 = P2;
 			P3 = P4;

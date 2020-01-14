@@ -119,8 +119,34 @@ public class Path extends Thread implements Serializable {
 				) );
 	}	
 	
+	public double getD1Y(double T) {
+		if (T > 1 || T < 0) {
+			new Error("Cannot access parts of path outside of range", ErrorType.Fatal);
+		}
+		
+		//System.out.println(length);
+		
+		T *= length;
+		
+		//System.out.println(T);
+		
+		int function = (int) Math.floor(T);
+		
+		if (T == length) {
+			function--;
+		}
+		
+		return ((
+				Yconstants.get(function)[0] * Math.pow(T, 2) * 3 + 
+				Yconstants.get(function)[1] * Math.pow(T, 1) * 2 + 
+				Yconstants.get(function)[2] * Math.pow(T, 0) * 1 +
+				Yconstants.get(function)[3] * Math.pow(T, 0) * 0
+				));
+	}
+	
 	//I'm lumping the massive methods D1 and D2 together.  They are the first and second
 	//derivative respectively.
+	
 	
 	public double getD1(double T) {
 		if (T > 1 || T < 0) {
@@ -140,15 +166,15 @@ public class Path extends Thread implements Serializable {
 		}
 		
 		return ((
-				Xconstants.get(function)[0] * Math.pow(T, 2) * 3 + 
-				Xconstants.get(function)[1] * Math.pow(T, 1) * 2 + 
-				Xconstants.get(function)[2] * Math.pow(T, 0) * 1 +
-				Xconstants.get(function)[3] * Math.pow(T, 0) * 0
-				)/(
 				Yconstants.get(function)[0] * Math.pow(T, 2) * 3 + 
 				Yconstants.get(function)[1] * Math.pow(T, 1) * 2 + 
 				Yconstants.get(function)[2] * Math.pow(T, 0) * 1 +
 				Yconstants.get(function)[3] * Math.pow(T, 0) * 0
+				)/(
+				Xconstants.get(function)[0] * Math.pow(T, 2) * 3 + 
+				Xconstants.get(function)[1] * Math.pow(T, 1) * 2 + 
+				Xconstants.get(function)[2] * Math.pow(T, 0) * 1 +
+				Xconstants.get(function)[3] * Math.pow(T, 0) * 0
 				) );
 	
 	}

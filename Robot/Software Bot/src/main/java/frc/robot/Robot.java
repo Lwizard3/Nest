@@ -27,6 +27,15 @@ import frc.robot.control_systems.Egg;
 import edu.wpi.first.networktables.*;
 import edu.wpi.first.wpilibj.Timer;
 
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.SPI;
+
+import com.revrobotics.ColorSensorV3;
+import edu.wpi.first.wpilibj.I2C;
+//import edu.wpi.first.wpilibj.util.Color;
+
+
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -56,6 +65,11 @@ public class Robot extends TimedRobot {
   public static double left;
   public static double right;
 
+  AHRS Navx;
+
+  private final I2C.Port i2cPort = I2C.Port.kOnboard;
+  private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
+
   Timer T = new Timer();
 
   int connectionCount = 0;
@@ -70,6 +84,9 @@ public class Robot extends TimedRobot {
     j0 = new Joystick(0);
 
     oi = new OI();
+
+    Navx = new AHRS(SPI.Port.kMXP);
+     
 
     left = 0;
     right = 0;
@@ -116,6 +133,11 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     //System.out.println(auth.getDouble(0));
+
+    //System.out.println("Navx Angle: " + Navx.getAngle());
+    
+    
+
 
     if (inst.getConnections().length != connectionCount) {
       connectionCount = inst.getConnections().length;
@@ -227,6 +249,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+
     if (auth.getDouble(0.0000) != temp) {
       System.out.println(auth.getDouble(0.0000));
       temp = auth.getDouble(0.0000);

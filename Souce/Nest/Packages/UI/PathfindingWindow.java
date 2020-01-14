@@ -202,7 +202,7 @@ public class PathfindingWindow extends JFrame implements ActionListener {
 		validate();
 		
 		Chick C = new Chick();
-		C.tune(0, S);
+		C.tune(0, S, 200);
 		for (DoublePoint D : C.points) {
 			FC.points.add(D.getPoint());
 			System.out.println(D);
