@@ -15,6 +15,12 @@ check out the Source folder for the code and the Final folder for the compiled j
 
 ## Changes:
 
+1/14/20: (Pure Pursuit)
+
+ - The Pathfollowing method is being changed from PID loops and setpoints to the pure pursuit algorothm
+ 
+ - Software Bot's code has been updated to 2020 under /robot/NewSoftwareBot
+
 12/09/19: (Setpoints)
 
  - The setpoints for the drive controller are now being calculated and graphed

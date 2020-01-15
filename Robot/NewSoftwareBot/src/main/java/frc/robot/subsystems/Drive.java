@@ -47,7 +47,7 @@ public class Drive extends SubsystemBase {
   }
 
   public int getRightEncoder(){
-    return (int)rDriveMotor.getSensorCollection().getQuadraturePosition();
+    return -(int)rDriveMotor.getSensorCollection().getQuadraturePosition();
   }
 
   public int getLeftEncoder(){

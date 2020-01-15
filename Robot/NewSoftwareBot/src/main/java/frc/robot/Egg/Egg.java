@@ -37,7 +37,8 @@ public class Egg extends CommandBase {
   @Override
   public void execute() {
     trackPos();
-    System.out.println("X: " + x + " Y: " + y);
+    //System.out.println(Navx.getAngle());
+    System.out.println("X: " + (int)x + " Y: " + (int)y);
     //System.out.println(Robot.drive.getLeftEncoder() + " " + Robot.drive.getRightEncoder());
     
   }
@@ -56,9 +57,10 @@ public class Egg extends CommandBase {
 
     double distance = ((oldLE - EncoderL) + (oldRE - EncoderR)) / 2;// - oldEval;
     
+    distance /= 53;
 
-    x += Math.cos(angle) * distance;
-    y += Math.sin(angle) * distance;
+    x += Math.cos(angle * Math.PI / 180) * distance;
+    y += Math.sin(angle * Math.PI / 180) * distance;
 
     oldLE = EncoderL;
     oldRE = EncoderR;

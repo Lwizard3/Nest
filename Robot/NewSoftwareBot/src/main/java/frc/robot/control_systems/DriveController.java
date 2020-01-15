@@ -25,14 +25,24 @@ public class DriveController extends CommandBase {
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  public void execute() {
-    double X = Robot.j0.getX();
-    double Y = -Robot.j0.getY();
+  public void execute() {  
+    double JX = Robot.j0.getX();
+    double JY = Robot.j0.getY();  
+    double X = Math.pow(JX, 2);
+    if (JX < 0) {
+      X = -X;
+    }
+    double Y = Math.pow(JY, 2);
+    if (JY > 0) {
+      Y = -Y;
+    }
 
-    if (Math.abs(X) < 0.3)
+    
+    if (Math.abs(Robot.j0.getX()) < 0.1)
       X = 0;
-    if (Math.abs(Y) < 0.3)
+    if (Math.abs(Robot.j0.getY()) < 0.1)
       Y = 0;
+      
 
     double Vr = 0, Vl = 0, b = 20;
 
