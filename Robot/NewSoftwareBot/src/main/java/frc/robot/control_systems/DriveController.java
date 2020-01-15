@@ -24,6 +24,7 @@ public class DriveController extends CommandBase {
   double r = -10, Vmax = 1;
 
   // Called repeatedly when this Command is scheduled to run
+  //Yes
   @Override
   public void execute() {  
     double JX = Robot.j0.getX();
