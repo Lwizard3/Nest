@@ -10,6 +10,8 @@ package frc.robot.control_systems;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
+import frc.robot.Egg.*;
+
 public class DriveController extends CommandBase {
   public DriveController() {
     addRequirements(Robot.drive);
@@ -29,19 +31,23 @@ public class DriveController extends CommandBase {
   public void execute() {  
     double JX = Robot.j0.getX();
     double JY = Robot.j0.getY();  
-    double X = Math.pow(JX, 2);
+    double X = Math.pow(Math.abs(JX), 1.2);
     if (JX < 0) {
       X = -X;
     }
-    double Y = Math.pow(JY, 2);
+    double Y = Math.pow(Math.abs(JY), 1.2);
     if (JY > 0) {
       Y = -Y;
     }
 
+    if (JY > 0.05) {
+      JX *= JY;
+    }
+
     
-    if (Math.abs(Robot.j0.getX()) < 0.1)
+    if (Math.abs(Robot.j0.getX()) < 0.02)
       X = 0;
-    if (Math.abs(Robot.j0.getY()) < 0.1)
+    if (Math.abs(Robot.j0.getY()) < 0.02)
       Y = 0;
       
 

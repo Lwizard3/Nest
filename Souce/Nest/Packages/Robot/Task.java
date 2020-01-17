@@ -13,4 +13,14 @@ public class Task {
 	public boolean Drive;
 	public Path path;
 	
+	public Task(Path P, float time) {
+		path = P;
+		Duration = time;
+	}
+	
+	public Task(String name, float time) {
+		Name = name;
+		Duration = time;
+	}
+	
 }
