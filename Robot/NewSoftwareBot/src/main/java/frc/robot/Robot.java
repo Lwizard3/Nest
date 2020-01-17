@@ -32,6 +32,10 @@ public class Robot extends TimedRobot {
   public static Drive drive = new Drive();
 
   public static Joystick j0;
+
+  public void scheduleCommand(Command C) {
+    CommandScheduler.getInstance().schedule(C);
+  }
   
 
   /**
@@ -43,7 +47,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    egg = new Egg();
+    egg = new Egg(this);
     
     
     j0 = new Joystick(0);
@@ -111,7 +115,7 @@ public class Robot extends TimedRobot {
     drivecontroller = new DriveController();
     drivecontroller.schedule();
 
-    egg = new Egg();
+    egg = new Egg(this);
     egg.schedule();
   }
 

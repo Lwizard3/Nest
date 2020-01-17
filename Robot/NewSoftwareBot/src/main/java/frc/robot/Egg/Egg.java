@@ -12,10 +12,19 @@ import frc.robot.Robot;
 
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
+import frc.robot.commands.*;
+import frc.robot.control_systems.DriveController;
 
 public class Egg extends CommandBase {
-  public Egg() {
+Robot robot;
+
+  public Egg(Robot R) {
     //addRequirements(Robot.drive);
+    robot = R;
+
+    DriveController DC = new DriveController();
+
+    robot.scheduleCommand(DC);
   }
 
   protected double x, y;
