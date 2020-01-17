@@ -10,26 +10,62 @@ package frc.robot.Egg;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
+import java.util.*;
+import java.awt.*;
+
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 import frc.robot.commands.*;
 import frc.robot.control_systems.DriveController;
+import frc.robot.Egg.Pathfinding.*;
+import frc.robot.Egg.Utility.*;
+import frc.robot.Egg.Utility.Math.*;
 
 public class Egg extends CommandBase {
 Robot robot;
+Schedule S;
 
   public Egg(Robot R) {
     //addRequirements(Robot.drive);
     robot = R;
 
-    DriveController DC = new DriveController();
+    ArrayList<Task> Tasks = new ArrayList<Task>();
 
-    robot.scheduleCommand(DC);
+    S = new Schedule(Tasks);
+
+    ArrayList<DoublePoint> points = new ArrayList<DoublePoint>();
+    points.add(new DoublePoint(0, 0)); 
+    points.add(new DoublePoint(10, 0)); 
+    points.add(new DoublePoint(10, 10)); 
+
+
+
+    Path P = new Path(points);
+
+
+    S.addTask(new Task(P, 1));
+
+    Task T = S.getNext();
+    for (double i = 0; i < 1; i += 0.001) {
+      path.add(T.path.get(i).getPoint());
+    }
   }
 
   protected double x, y;
   protected double oldEval = 0, oldLE = 0, oldRE = 0;
   protected AHRS Navx;
+
+
+  ArrayList<Point> path = new ArrayList<Point>();
+
+  
+  private double drive(double x, double y, double angle) {
+    //Implement pure pursuit here
+    //negaitive radius for left, positive for right
+    int radius = 0;
+
+    return radius;
+  }
   
 
   // Called just before this Command runs the first time
