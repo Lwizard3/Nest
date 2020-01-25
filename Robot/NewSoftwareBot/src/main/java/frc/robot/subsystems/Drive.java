@@ -20,10 +20,10 @@ public class Drive extends SubsystemBase {
     lDriveMotor = new TalonSRX(2);
 
     rDriveMotor.configFactoryDefault();
-    rDriveMotor.setNeutralMode(NeutralMode.Coast);
+    rDriveMotor.setNeutralMode(NeutralMode.Brake);
     
     lDriveMotor.configFactoryDefault();
-    lDriveMotor.setNeutralMode(NeutralMode.Coast);
+    lDriveMotor.setNeutralMode(NeutralMode.Brake);
 
     rDriveMotor.setInverted(true);
 

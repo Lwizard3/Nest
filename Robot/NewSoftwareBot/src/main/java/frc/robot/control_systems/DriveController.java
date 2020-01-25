@@ -31,17 +31,30 @@ public class DriveController extends CommandBase {
   public void execute() {  
     double JX = Robot.j0.getX();
     double JY = Robot.j0.getY();  
-    double X = Math.pow(Math.abs(JX), 1.2);
+
+    
+
+    if (JY < 0.05 && JY > -0.05) {
+      JY = 0;
+    }
+
+
+    double X = Math.pow(Math.abs(JX), 0.7);      
+
+    if (JX < 0.12 && JX > -0.12) {
+      X = 0;
+    } else {
+      X -= 0.12;
+    }
+
     if (JX < 0) {
       X = -X;
     }
+
+
     double Y = Math.pow(Math.abs(JY), 1.2);
     if (JY > 0) {
       Y = -Y;
-    }
-
-    if (JY > 0.05) {
-      JX *= JY;
     }
 
     

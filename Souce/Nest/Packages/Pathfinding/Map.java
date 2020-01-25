@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import Schedule.Path;
 import UI.PathfindingWindow;
 import Utility.*;
 import Utility.Error;

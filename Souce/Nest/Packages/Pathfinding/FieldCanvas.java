@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import Schedule.Path;
 import Utility.ColorFlux;
 import Utility.Math.DoublePoint;
 
@@ -74,7 +75,7 @@ public class FieldCanvas extends Canvas {
 						
 			c = 0;			
 			
-			for (DoublePoint Point : P.points) {
+			for (DoublePoint Point : P.getArray()) {
 				temp = Point.getPoint();
 				c++;
 				drawNode(temp.x, temp.y, 10, c, g);

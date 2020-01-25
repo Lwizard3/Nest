@@ -5,6 +5,7 @@ import java.awt.Point;
 
 import Interface.Interface;
 import Interface.Timeout;
+import Schedule.Path;
 import UI.PathfindingWindow;
 import Utility.*;
 import Utility.Error;

@@ -15,6 +15,10 @@ import frc.robot.control_systems.*;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.Egg.*;
 
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.SPI;
+
+
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -47,10 +51,10 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    egg = new Egg(this);
     
     
     j0 = new Joystick(0);
+
   }
 
   /**
@@ -93,6 +97,9 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
+
+    egg = new Egg(this);
+    egg.schedule();
   }
 
   /**
@@ -100,6 +107,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+
+    
   }
 
   @Override
@@ -115,8 +124,6 @@ public class Robot extends TimedRobot {
     drivecontroller = new DriveController();
     drivecontroller.schedule();
 
-    egg = new Egg(this);
-    egg.schedule();
   }
 
   /**

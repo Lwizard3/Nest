@@ -1,6 +1,4 @@
-package Robot;
-
-import Pathfinding.Path;
+package Schedule;
 
 public class Task {
 	

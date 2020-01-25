@@ -3,15 +3,17 @@ package frc.robot.Egg.Pathfinding;
 import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Hashtable;
 import java.util.List;
 
 import frc.robot.Egg.Utility.*;
 import frc.robot.Egg.Utility.Error;
 import frc.robot.Egg.Utility.Math.*;
 
-public class Path extends Thread implements Serializable {
+public class Path implements Serializable {
 	
-	//This class is the path class.  It represents one series of points and the splines 
+	//This class is the path class.  It represents one series of navPoints and the splines 
 	//between them
 
 	/**
@@ -22,19 +24,43 @@ public class Path extends Thread implements Serializable {
 	
 	public ArrayList<double[]> Xconstants = new ArrayList<double[]>();
 	public ArrayList<double[]> Yconstants = new ArrayList<double[]>();
-	public ArrayList<DoublePoint> points = new ArrayList<DoublePoint>();
+	public ArrayList<DoublePoint> navPoints = new ArrayList<DoublePoint>();
+	public ArrayList<DoublePoint> travelPoints = new ArrayList<DoublePoint>();
 	
 	int length;
 	
 	int f;
 	
+	public double resolution = 1000;
+	
 	public Path(ArrayList<DoublePoint> p) {
-		points = p;
+		navPoints = p;
 		this.calculate();
+		
 	}
 	
 	public void calculate() {
-		this.start();
+		this.run();
+	}
+	
+	public DoublePoint getClosest(DoublePoint P) {
+		double min = DoublePoint.getDistance(P, travelPoints.get(0));
+		DoublePoint minPoint = travelPoints.get(0);
+
+		
+		
+		return minPoint; 
+	}
+	
+	public void populate() {
+		for (double i = 0; i < resolution; i++) {
+			travelPoints.add(get(i / resolution));
+		}		
+		return;
+	}
+	
+	public ArrayList<DoublePoint> getArray() {
+		return travelPoints;
 	}
 	
 	public void run() {	
@@ -45,37 +71,38 @@ public class Path extends Thread implements Serializable {
 		//called.  Though calculating a path is not that resource intensive, many can be 
 		//calculated at once using this
 		
-		length = points.size() - 1;
+		length = navPoints.size() - 1;
 		
 		ArrayList<DoublePoint> Xlist = new ArrayList<DoublePoint>();
 		ArrayList<DoublePoint> Ylist = new ArrayList<DoublePoint>();
 
 		double ty = 0, tx = 0;
 		
-		for (int i = 0; i < points.size(); i++) {
+		for (int i = 0; i < navPoints.size(); i++) {
 			try {
-				tx += Math.abs(points.get(i).x - points.get(i - 1).x);
-				ty += Math.abs(points.get(i).y - points.get(i - 1).y);
+				tx += Math.abs(navPoints.get(i).x - navPoints.get(i - 1).x);
+				ty += Math.abs(navPoints.get(i).y - navPoints.get(i - 1).y);
 			} catch (Exception E) {
 				
 			}
-			Xlist.add(new DoublePoint(i, points.get(i).x));
-			Ylist.add(new DoublePoint(i, points.get(i).y));
+			Xlist.add(new DoublePoint(i, navPoints.get(i).x));
+			Ylist.add(new DoublePoint(i, navPoints.get(i).y));
 		}
 		
 		Xconstants = CubicSpline.smoothCalculate(Xlist);
 		Yconstants = CubicSpline.smoothCalculate(Ylist);	
 		
+		populate();
 	}
 	
 	public void reverse() {
 		ArrayList<DoublePoint> temp = new ArrayList<DoublePoint>();
 		
-		for (int i = points.size() - 1; i >= 0; i--) {
-			temp.add(points.get(i));
+		for (int i = navPoints.size() - 1; i >= 0; i--) {
+			temp.add(navPoints.get(i));
 		}
 				
-		points = temp;
+		navPoints = temp;
 	}
 	
 	public DoublePoint get(double T) {
@@ -83,8 +110,8 @@ public class Path extends Thread implements Serializable {
 		//This chunk of code allows the point to be acquired on the path from 0-1, where
 		//0 is the beginning and 1 is the end.
 		
-		if (T > 1 || T < 0) {
-			new Error("Cannot access parts of path outside of range", ErrorType.Fatal);
+		if (T >= 1 || T <= 0) {
+			//new Error("Cannot access parts of path outside of range", ErrorType.Fatal);
 		}
 		
 		//System.out.println(length);

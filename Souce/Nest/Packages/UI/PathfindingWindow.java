@@ -1,8 +1,6 @@
 package UI;
 import javax.swing.*;
 
-import Chick.Chick;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +12,7 @@ import java.util.Random;
 
 import Main.Nest;
 import Pathfinding.*;
+import Schedule.Path;
 import Utility.ErrorType;
 import Utility.FileManager;
 import Utility.Math.DoublePoint;
@@ -200,13 +199,7 @@ public class PathfindingWindow extends JFrame implements ActionListener {
 		//S.drive(paths.get(0));
 		
 		validate();
-		
-		Chick C = new Chick();
-		C.tune(0, S, 200);
-		for (DoublePoint D : C.points) {
-			FC.points.add(D.getPoint());
-			System.out.println(D);
-		}
+
 
 	}
 	

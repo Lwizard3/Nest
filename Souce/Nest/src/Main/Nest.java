@@ -5,12 +5,11 @@ import javax.swing.*;
 
 import org.opencv.core.Core;
 
-import Chick.Chick;
 import Egg.EggGenerator;
 import Pathfinding.NewMap;
-import Pathfinding.Path;
 import Pathfinding.Socket;
 import Robot.Robot;
+import Schedule.Path;
 
 import java.awt.Image;
 import java.io.File;

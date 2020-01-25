@@ -24,6 +24,7 @@ import frc.robot.Egg.Utility.Math.*;
 public class Egg extends CommandBase {
 Robot robot;
 Schedule S;
+PurePursuit purePursuit;
 
   public Egg(Robot R) {
     //addRequirements(Robot.drive);
@@ -35,8 +36,39 @@ Schedule S;
 
     ArrayList<DoublePoint> points = new ArrayList<DoublePoint>();
     points.add(new DoublePoint(0, 0)); 
-    points.add(new DoublePoint(10, 0)); 
-    points.add(new DoublePoint(10, 10)); 
+    points.add(new DoublePoint(100, 0));
+    points.add(new DoublePoint(0, 0));
+
+    /*
+    points.add(new DoublePoint(25, 0));
+    points.add(new DoublePoint(37, 0));
+    points.add(new DoublePoint(37, 10));
+    points.add(new DoublePoint(37, 20));
+    points.add(new DoublePoint(37, 30));
+    points.add(new DoublePoint(37, 40)); 
+    points.add(new DoublePoint(37, 50));
+    points.add(new DoublePoint(37, 60));   
+    points.add(new DoublePoint(37, 69));
+    points.add(new DoublePoint(63, 69));
+    points.add(new DoublePoint(63, 60));
+    points.add(new DoublePoint(63, 50));
+    points.add(new DoublePoint(63, 40));
+    points.add(new DoublePoint(63, 30));
+    points.add(new DoublePoint(63, 20));
+    points.add(new DoublePoint(63, 10));
+    points.add(new DoublePoint(63, 0));
+
+    
+    points.add(new DoublePoint(30, 0));
+    points.add(new DoublePoint(30, 80));
+    points.add(new DoublePoint(70,  80));
+    points.add(new DoublePoint(70, -0));
+    points.add(new DoublePoint(100, 0)); 
+    //points.add(new DoublePoint(80, 100));
+    //points.add(new DoublePoint(0, 50));
+    //points.add(new DoublePoint(100, 100));
+    //points.add(new DoublePoint(5, 5)); 
+    */
 
 
 
@@ -46,50 +78,78 @@ Schedule S;
     S.addTask(new Task(P, 1));
 
     Task T = S.getNext();
-    for (double i = 0; i < 1; i += 0.001) {
-      path.add(T.path.get(i).getPoint());
-    }
+    
+    purePursuit = new PurePursuit(T.path, b);
+
+
+    
   }
 
-  protected double x, y;
+  protected double x, y, angle, b = 20;
   protected double oldEval = 0, oldLE = 0, oldRE = 0;
-  protected AHRS Navx;
-
-
-  ArrayList<Point> path = new ArrayList<Point>();
-
-  
-  private double drive(double x, double y, double angle) {
-    //Implement pure pursuit here
-    //negaitive radius for left, positive for right
-    int radius = 0;
-
-    return radius;
-  }
-  
+  protected AHRS Navx;  
 
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
     Robot.drive.resetEncoders();
     
-    Navx = new AHRS(SPI.Port.kMXP);
     x = (double)0;
     y = (double)0;
+
+
+    Navx = new AHRS(SPI.Port.kMXP);
+
+    Navx.reset();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
+    angle = Navx.getAngle();
     trackPos();
-    //System.out.println(Navx.getAngle());
-    System.out.println("X: " + (int)x + " Y: " + (int)y);
-    //System.out.println(Robot.drive.getLeftEncoder() + " " + Robot.drive.getRightEncoder());
+
+    double r = -10, Vmax = 0.3;
+    double Vr = 0, Vl = 0;
+
+
+    if (purePursuit.isFinished()) {
+      r = 0;
+    } else {
+      r = purePursuit.get(x, y, angle);
+    }
+
+    //System.out.println(r);
+
+    if (r > 0) {
+      r -= b / 2;
+      Vr = Vmax;
+      Vl = ((r * Vr) / b) / (1 + r / b);
+    } else if (r < 0) {
+      r *= -1;
+      r -= b / 2;
+      Vl = Vmax;
+      Vr = ((r * Vl) / b) / (1 + r / b);
+
+    } else {
+      Vl = 0;
+      Vr = 0;
+    }
+
+    Vr = Clamp.clamp(0, Vmax, Vr);
+    Vl = Clamp.clamp(0, Vmax, Vl);
+
+    //System.out.println(Vr + " " + Vl);
+
+    Robot.drive.setRight(Vr);
+    Robot.drive.setLeft(Vl);
+
+    System.out.println("X: " + (int)x + " Y: " + (int)y + " Angle: " + (int)angle);
+    
     
   }
   
   public void trackPos() {
-    double angle = Navx.getAngle();
     boolean negative = (angle < 0) ? true : false;
     angle = Math.abs(angle);
     while (angle  > 360) {
@@ -104,7 +164,7 @@ Schedule S;
     
     distance /= 53;
 
-    x += Math.cos(angle * Math.PI / 180) * distance;
+    x -= Math.cos(angle * Math.PI / 180) * distance;
     y += Math.sin(angle * Math.PI / 180) * distance;
 
     oldLE = EncoderL;
