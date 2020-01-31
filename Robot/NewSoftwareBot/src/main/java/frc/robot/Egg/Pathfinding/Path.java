@@ -29,7 +29,7 @@ public class Path implements Serializable {
 	
 	int length;
 	
-	int f;
+	public int f;
 	
 	public double resolution = 1000;
 	

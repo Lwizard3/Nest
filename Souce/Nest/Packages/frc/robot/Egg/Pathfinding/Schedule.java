@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import frc.robot.Egg.Pathfinding.*;
 
 public class Schedule implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4726394004929100537L;
 	public ArrayList<Task> Tasks = new ArrayList<Task>();
 	int spot = -1;
 	
