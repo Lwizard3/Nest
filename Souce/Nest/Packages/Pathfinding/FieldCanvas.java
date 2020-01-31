@@ -75,7 +75,7 @@ public class FieldCanvas extends Canvas {
 						
 			c = 0;			
 			
-			for (DoublePoint Point : P.getArray()) {
+			for (DoublePoint Point : P.navPoints) {
 				temp = Point.getPoint();
 				c++;
 				drawNode(temp.x, temp.y, 10, c, g);
