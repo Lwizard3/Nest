@@ -3,12 +3,12 @@ package Interface;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 import javax.imageio.ImageIO;
 
-import Utility.Error;
-import Utility.ErrorType;
 import edu.wpi.first.networktables.*;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.cscore.CvSink;
@@ -19,66 +19,46 @@ import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
 import org.opencv.imgcodecs.Imgcodecs;
 
+import frc.robot.Egg.Pathfinding.*;
+import frc.robot.Egg.Utility.Error;
+import frc.robot.Egg.Utility.ErrorType;
+
 public class Interface {
 	
-	NetworkTableEntry Right;
-	NetworkTableEntry Left;
-	NetworkTableEntry auth;	
-	NetworkTableInstance inst;
-	NetworkTableEntry comm;
+	NetworkTableEntry Schedule;
 	NetworkTable table;
+	NetworkTableInstance inst;
 	
 	boolean authenticated = false;
 	
 	public Interface() {
 		Start();		 
-		 
-		 auth.setValue(0);
-		 
-		 auth.addListener(event -> {
-			 authenticated = false;
-				if (auth.getDouble(0) == 2.0) {
-					auth.setValue(0);
-					authenticated = true;
-				}
-			}, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+
 	}
 	
 	public void Start() {
-		inst = NetworkTableInstance.getDefault();
+		 inst = NetworkTableInstance.getDefault();
 		 table = inst.getTable("Nest");
-		 Right = table.getEntry("Right");
-		 Left = table.getEntry("Left");
-		 auth = table.getEntry("auth");
-		 comm = table.getEntry("comm");
+		 Schedule = table.getEntry("Schedule");
 		 inst.startClientTeam(589); 
 		 inst.startDSClient();
 	}
 	
-	public void Close() {
-		while (!(auth.getDouble(0) == 0)) {
-			try {
-				Thread.sleep(50);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
+	public void Close() {		
 		inst.stopClient();
 		inst.stopDSClient();
 		inst.stopClient();
 	}
 	
-	public boolean send(double left, double right, boolean timeout) {
+	public boolean send(Schedule schedule, boolean timeout) {
 		if (timeout) {
-			if (send(left, right, true)) {
+			if (send(schedule, Timeout.Allow)) {
 				return true;
 			} else {
 				return false;
 			}
 		} else {
-			if (send(left, right, false)) {
+			if (send(schedule, Timeout.Deny)) {
 				return true;
 			} else {
 				return false;
@@ -86,7 +66,7 @@ public class Interface {
 		}
 	}
 	
-	public boolean send(double left, double right, Timeout timeout) {
+	public boolean send(Schedule schedule, Timeout timeout) {
 		
 		for (int i = 0; i < 10; i++) {
 			try {
@@ -106,50 +86,18 @@ public class Interface {
 			return false;
 		}
 		
-		
-		Left.setValue(left);
-		Right.setValue(right);
-		auth.setValue(1);	
-		
-		if (timeout == Timeout.Deny) {
-		
-			while (!(auth.getDouble(0) == 2.0)) {
-				try {
-					Thread.sleep(50);
-				} catch (InterruptedException e) {			
-				}
-				
-				//System.out.println(auth.getDouble(0));
-				
-				if ((auth.getDouble(0) == 2.0)) {
-					auth.forceSetDouble(0);
-					authenticated = false;
-					return true;
-				}
-			}
-		} else {
-			for (int i = 0; i < 10; i++) {
-				try {
-					Thread.sleep(50);
-				} catch (InterruptedException e) {			
-				}
-				
-				//System.out.println(auth.getDouble(0));
-				
-				if ((auth.getDouble(0) == 2.0)) {
-					auth.forceSetDouble(0);
-					authenticated = false;
-					return true;
-				}
-			}
-			
-			System.out.println(auth.getDouble(0));
-			
-			auth.setValue(0);
-			
-			new Error("message timed out", ErrorType.Temporary);	
-		 	
+		byte[] stream = null;
+		try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ObjectOutputStream oos = new ObjectOutputStream(baos);) {
+		    oos.writeObject(schedule);
+		    stream = baos.toByteArray();
+		} catch (IOException e) {
+		    new Error("Cannot transfer - Error in serialization: " + e.getMessage(), ErrorType.NonFatal);
+		    return false;
 		}
+		
+		Schedule.forceSetRaw(stream);		 	
+		
 		
 		return false;
 		

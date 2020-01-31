@@ -5,13 +5,12 @@ import java.awt.Point;
 
 import Interface.Interface;
 import Interface.Timeout;
-import Schedule.Path;
 import UI.PathfindingWindow;
-import Utility.*;
-import Utility.Error;
-import Utility.ErrorType;
-import Utility.Math.Clamp;
-import Utility.Math.DoublePoint;
+import frc.robot.Egg.Pathfinding.Path;
+import frc.robot.Egg.Utility.*;
+import frc.robot.Egg.Utility.Error;
+import frc.robot.Egg.Utility.Math.Clamp;
+import frc.robot.Egg.Utility.Math.DoublePoint;
 
 public class Socket {
 	public Field Field;
@@ -115,7 +114,7 @@ public class Socket {
 			System.out.println(left + " " + right);
 			
 			
-			I.send(left / 5, right / 5, Timeout.Allow);
+			//I.send(left / 5, right / 5, Timeout.Allow);
 	
 			
 			try {
@@ -126,7 +125,7 @@ public class Socket {
 			}
 		}
 		
-		I.send(0, 0, Timeout.Allow);
+		//I.send(0, 0, Timeout.Allow);
 		
 		I.Close();
 		

@@ -21,8 +21,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import Main.Nest;
-import Utility.Error;
-import Utility.ErrorType;
+import frc.robot.Egg.Utility.Error;
+import frc.robot.Egg.Utility.ErrorType;
 
 public class EggGenerator {
 

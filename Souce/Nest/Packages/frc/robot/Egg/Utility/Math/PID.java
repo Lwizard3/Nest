@@ -1,4 +1,4 @@
-package Utility.Math;
+package frc.robot.Egg.Utility.Math;
 
 public class PID {
 	public double kP, kI, kD, error, oldError = 0, Derror, Ierror, clamp;

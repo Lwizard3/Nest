@@ -1,4 +1,4 @@
-package Utility;
+package frc.robot.Egg.Utility;
 import java.awt.Component;
 import java.awt.MouseInfo;
 import java.awt.Point;

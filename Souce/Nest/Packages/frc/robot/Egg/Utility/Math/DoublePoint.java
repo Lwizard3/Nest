@@ -1,4 +1,4 @@
-package Utility.Math;
+package frc.robot.Egg.Utility.Math;
 
 import java.awt.Point;
 import java.io.Serializable;
@@ -6,7 +6,7 @@ import java.io.Serializable;
 //One problem I have is the Point class.  While it is nice it doesn't work with non integer
 //numbers, so I wrote this class to express points as a pair of doubles
 
-public class DoublePoint {
+public class DoublePoint implements Serializable {
 
 	public double x;
 	public double y;

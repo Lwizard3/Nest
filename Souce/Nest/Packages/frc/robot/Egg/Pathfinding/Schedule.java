@@ -1,8 +1,11 @@
-package Schedule;
+package frc.robot.Egg.Pathfinding;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Schedule {
+import Pathfinding.Field;
+
+public class Schedule implements Serializable {
 	public ArrayList<Task> Tasks = new ArrayList<Task>();
 	int spot = -1;
 	

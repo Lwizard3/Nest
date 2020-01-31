@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import Schedule.Path;
-import Utility.ColorFlux;
-import Utility.Math.DoublePoint;
+import frc.robot.Egg.Pathfinding.Path;
+import frc.robot.Egg.Utility.ColorFlux;
+import frc.robot.Egg.Utility.Math.DoublePoint;
 
 public class FieldCanvas extends Canvas {
 	

@@ -12,8 +12,15 @@ import frc.robot.Robot;
 
 import java.util.*;
 import java.awt.*;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
 import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.SPI;
 import frc.robot.commands.*;
 import frc.robot.control_systems.DriveController;
@@ -22,15 +29,63 @@ import frc.robot.Egg.Utility.*;
 import frc.robot.Egg.Utility.Math.*;
 
 public class Egg extends CommandBase {
-Robot robot;
-Schedule S;
-PurePursuit purePursuit;
+  Robot robot;
+  Schedule S;
+  PurePursuit purePursuit;
+
+  NetworkTableEntry Schedule;
+  NetworkTable table;
+  NetworkTableInstance inst;
+
+  boolean hasPure = false;
 
   public Egg(Robot R) {
-    //addRequirements(Robot.drive);
+    // addRequirements(Robot.drive);
     robot = R;
 
+    inst = NetworkTableInstance.getDefault();
+    table = inst.getTable("Nest");
+    Schedule = table.getEntry("Schedule");
+    inst.startClientTeam(589);
+    inst.startDSClient();
+
+    byte[] empty = new byte[1];
+    byte[] temp;
+
+    while (Schedule.getRaw(empty) == empty) {
+      try {
+        Thread.sleep(10);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
+
+    temp = Schedule.getRaw(empty);
+
+    
+		
+		
+
+    try (ByteArrayInputStream bais = new ByteArrayInputStream(temp);
+      ObjectInputStream ois = new ObjectInputStream(bais);) {
+            S = (Schedule) ois.readObject();
+    } catch (IOException E) {
+      System.out.println("-------------------------------------");
+      System.out.println("Cannot Deserialize(IO Exception): " + E.getMessage() + " " + E.getCause());
+      System.out.println("-------------------------------------");
+      return;
+    } catch (ClassNotFoundException E2) {
+      System.out.println("-------------------------------------");
+      System.out.println("Cannot Deserialize(Class Error): " + E2.getMessage() + " " + E2.getCause());
+      System.out.println("-------------------------------------");
+      return;
+    }
+
+    System.out.println("Deserialized");
+
     ArrayList<Task> Tasks = new ArrayList<Task>();
+
+
 
     S = new Schedule(Tasks);
 
@@ -72,15 +127,15 @@ PurePursuit purePursuit;
 
 
 
-    Path P = new Path(points);
+    //Path P = new Path(points);
 
 
-    S.addTask(new Task(P, 1));
+    //S.addTask(new Task(P, 1));
 
     Task T = S.getNext();
     
     purePursuit = new PurePursuit(T.path, b);
-
+    hasPure = true;
 
     
   }
@@ -106,10 +161,15 @@ PurePursuit purePursuit;
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
+
+    if (!hasPure) {
+      return;
+    }
+
     angle = Navx.getAngle();
     trackPos();
 
-    double r = -10, Vmax = 0.3;
+    double r = -10, Vmax = 0.1;
     double Vr = 0, Vl = 0;
 
 

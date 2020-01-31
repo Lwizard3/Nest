@@ -1,4 +1,4 @@
-package Utility.Math;
+package frc.robot.Egg.Utility.Math;
 
 import java.awt.Point;
 import java.io.Serializable;

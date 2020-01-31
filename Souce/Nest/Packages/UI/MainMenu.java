@@ -4,10 +4,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import Utility.*;
-import Utility.Error;
-import Utility.ErrorType;
+
 import Main.Nest;
+import frc.robot.Egg.Utility.*;
+import frc.robot.Egg.Utility.Error;
 
 public class MainMenu extends JFrame implements ActionListener {
 	

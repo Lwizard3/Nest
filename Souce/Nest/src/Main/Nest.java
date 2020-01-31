@@ -9,7 +9,6 @@ import Egg.EggGenerator;
 import Pathfinding.NewMap;
 import Pathfinding.Socket;
 import Robot.Robot;
-import Schedule.Path;
 
 import java.awt.Image;
 import java.io.File;
@@ -19,10 +18,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.*;
 import UI.*;
-import Utility.*;
-import Utility.Error;
-import Utility.ErrorType;
-import Utility.Math.*;
+import frc.robot.Egg.Pathfinding.Path;
+import frc.robot.Egg.Utility.*;
+import frc.robot.Egg.Utility.Error;
+import frc.robot.Egg.Utility.Math.*;
 
 
 public class Nest {

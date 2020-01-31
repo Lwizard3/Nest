@@ -1,4 +1,4 @@
-package Utility;
+package frc.robot.Egg.Utility;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -13,7 +13,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
-import Utility.ErrorType;
+import frc.robot.Egg.Utility.ErrorType;
 
 public class FileManager {
 	

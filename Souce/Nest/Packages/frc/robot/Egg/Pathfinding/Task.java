@@ -1,6 +1,8 @@
-package Schedule;
+package frc.robot.Egg.Pathfinding;
 
-public class Task {
+import java.io.Serializable;
+
+public class Task implements Serializable {
 	
 	//This is a class to hold the abstract idea of a task.  A task is a command programmed into
 	//the robot, such a putting a hatch panel on the cargo ship in the 2019 game

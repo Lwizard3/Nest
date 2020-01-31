@@ -1,4 +1,4 @@
-package Utility;
+package frc.robot.Egg.Utility;
 import javax.swing.*;
 
 public class Error extends JOptionPane {

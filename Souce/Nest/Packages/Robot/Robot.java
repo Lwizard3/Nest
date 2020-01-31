@@ -4,10 +4,9 @@ import java.awt.List;
 import java.io.File;
 import java.io.Serializable;
 
-import Schedule.Task;
-import Utility.Error;
-
-import Utility.ErrorType;
+import frc.robot.Egg.Pathfinding.Task;
+import frc.robot.Egg.Utility.Error;
+import frc.robot.Egg.Utility.ErrorType;
 
 public class Robot implements Serializable {
 	

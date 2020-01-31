@@ -1,11 +1,11 @@
-package Utility;
+package frc.robot.Egg.Utility;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Utility.ErrorType;
+import frc.robot.Egg.Utility.ErrorType;
 
 public final class FileCreator {
 	

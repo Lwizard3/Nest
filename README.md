@@ -15,6 +15,10 @@ check out the Source folder for the code and the Final folder for the compiled j
 
 ## Changes:
 
+1/25/20: (Pure Pursuit Complete)
+
+ - The pure pursuit algorithm has been implemented on NewSoftwareBot
+
 1/14/20: (Pure Pursuit)
 
  - The Pathfollowing method is being changed from PID loops and setpoints to the pure pursuit algorothm

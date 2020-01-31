@@ -13,13 +13,13 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import Schedule.Path;
 import UI.PathfindingWindow;
-import Utility.*;
-import Utility.Error;
-import Utility.Math.AStar;
-import Utility.Math.DoublePoint;
-import Utility.Math.Matrix;
+import frc.robot.Egg.Pathfinding.Path;
+import frc.robot.Egg.Utility.*;
+import frc.robot.Egg.Utility.Error;
+import frc.robot.Egg.Utility.Math.AStar;
+import frc.robot.Egg.Utility.Math.DoublePoint;
+import frc.robot.Egg.Utility.Math.Matrix;
 
 public class Map implements Serializable {
 	public Matrix map;

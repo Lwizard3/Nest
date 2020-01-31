@@ -10,9 +10,9 @@ import java.io.IOException;
 
 import Main.Nest;
 import UI.PathfindingWindow;
-import Utility.ErrorType;
-import Utility.FileManager;
-import Utility.Error;
+import frc.robot.Egg.Utility.Error;
+import frc.robot.Egg.Utility.ErrorType;
+import frc.robot.Egg.Utility.FileManager;
 import UI.Browse;
 
 public class NewMap extends JFrame implements ActionListener {

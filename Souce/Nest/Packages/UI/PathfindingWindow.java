@@ -1,6 +1,8 @@
 package UI;
 import javax.swing.*;
 
+import Interface.Timeout;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,12 +14,14 @@ import java.util.Random;
 
 import Main.Nest;
 import Pathfinding.*;
-import Schedule.Path;
-import Utility.ErrorType;
-import Utility.FileManager;
-import Utility.Math.DoublePoint;
-import Utility.DragListener;
-import Utility.Error;
+import frc.robot.Egg.Pathfinding.Path;
+import frc.robot.Egg.Pathfinding.Schedule;
+import frc.robot.Egg.Pathfinding.Task;
+import frc.robot.Egg.Utility.DragListener;
+import frc.robot.Egg.Utility.Error;
+import frc.robot.Egg.Utility.ErrorType;
+import frc.robot.Egg.Utility.FileManager;
+import frc.robot.Egg.Utility.Math.DoublePoint;
 import UI.Browse;
 
 
@@ -197,6 +201,17 @@ public class PathfindingWindow extends JFrame implements ActionListener {
 			FC.paths.add(P);
 		}
 		//S.drive(paths.get(0));
+		
+		ArrayList<Task> tasks = new ArrayList<Task>();
+		
+		for (Path P : paths) {
+			tasks.add(new Task(P, 0));
+			
+		}
+		
+		Schedule schedule = new Schedule(tasks);
+		
+		S.I.send(schedule, Timeout.Allow);
 		
 		validate();
 

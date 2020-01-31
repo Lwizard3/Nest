@@ -6,14 +6,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
-import Utility.DragListener;
-import Utility.Colors;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import Main.Nest;
+import frc.robot.Egg.Utility.Colors;
+import frc.robot.Egg.Utility.DragListener;
 
 public class ScheduleWindow extends JFrame implements ActionListener {
 	

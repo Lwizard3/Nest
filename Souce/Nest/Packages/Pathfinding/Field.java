@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 import UI.PathfindingWindow;
-import Utility.Error;
-import Utility.ErrorType;
+import frc.robot.Egg.Utility.Error;
+import frc.robot.Egg.Utility.ErrorType;
 
 
 public class Field implements Serializable {
