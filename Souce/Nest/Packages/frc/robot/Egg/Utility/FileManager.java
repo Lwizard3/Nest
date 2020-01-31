@@ -13,7 +13,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
-import frc.robot.Egg.Utility.ErrorType;
+import frc.robot.Egg.Utility.*;
 
 public class FileManager {
 	

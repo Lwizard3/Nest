@@ -2,11 +2,13 @@ package frc.robot.Egg.Pathfinding;
 
 import java.util.ArrayList;
 
-import frc.robot.Egg.Utility.Math.DoublePoint;
+import org.opencv.core.RotatedRect;
+
+import frc.robot.Egg.Utility.Math.*;
 
 public class PurePursuit {
 
-public Path Path;
+	public Path Path;
 	
 	public double t = 0;
 	double lookaheadDistance = 20;
@@ -126,4 +128,6 @@ public Path Path;
 			
 		return lookaheadPoint;
 	}
+		
+	
 }

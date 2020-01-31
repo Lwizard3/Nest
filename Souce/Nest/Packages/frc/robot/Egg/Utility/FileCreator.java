@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import frc.robot.Egg.Utility.ErrorType;
+import frc.robot.Egg.Utility.*;
 
 public final class FileCreator {
 	

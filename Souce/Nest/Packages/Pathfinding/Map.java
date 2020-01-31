@@ -162,12 +162,8 @@ public class Map implements Serializable {
 		temp.reverse();
 		//temp.calculate();
 		
-		try {
-			temp.join();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		
 		
 		return temp;
 	}
